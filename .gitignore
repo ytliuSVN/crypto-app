@@ -52,3 +52,10 @@ buck-out/
 # Expo
 .expo/
 web-build/
+
+# VisualStudioCode
+**/.vscode/
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
