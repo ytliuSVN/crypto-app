@@ -10,10 +10,10 @@ const port = process.env.PORT || 3001;
 app.use(cors());
 
 app.get('/*', (req, res) => {
-  let url = process.env.API_URL;
+  const baseUrl = `${process.env.API_URL}/v1/cryptocurrency/listings/latest?sort=market_cap&start=1&limit=25&convert=EUR`;
 
   axios
-    .get(url, { headers: { 'X-CMC_PRO_API_KEY': process.env.CMC_API_KEY } })
+    .get(baseUrl, { headers: { 'X-CMC_PRO_API_KEY': process.env.CMC_API_KEY } })
     .then((response) => {
       res.send(response.data);
     })
