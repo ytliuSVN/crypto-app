@@ -1,49 +1,55 @@
 import { StatusBar } from 'expo-status-bar';
 import React, { useState } from 'react';
-import { StyleSheet, Text, View, Button } from 'react-native';
+import { StyleSheet, Text, View, SafeAreaView, FlatList } from 'react-native';
 
-const Greeting = (props) => {
-  return (
-    <View style={styles.center}>
-      <Text>Hello {props.name}</Text>
-    </View>
-  );
-};
+const DATA = [
+  {
+    id: 'bd7acbea-c1b1-46c2-aed5-3ad53abb28ba',
+    title: 'First Item',
+  },
+  {
+    id: '3ac68afc-c605-48d3-a4f8-fbd91aa97f63',
+    title: 'Second Item',
+  },
+  {
+    id: '58694a0f-3da1-471f-bd96-145571e29d72',
+    title: 'Third Item',
+  },
+];
+
+const Item = ({ title }) => (
+  <View style={styles.item}>
+    <Text style={styles.title}>{title}</Text>
+  </View>
+);
 
 const App = () => {
-  const [count, setCount] = useState(0);
-
+  const renderItem = ({ item }) => <Item title={item.title} />;
   return (
-    <View style={styles.container}>
-      <Greeting name='AslanT' />
-      <Greeting name='Jaina' />
-
-      <Text>You clicked {count} times</Text>
-
-      <Button
-        onPress={() => setCount(count + 1)}
-        title='Click me!'
-        color='#841584'
-        accessibilityLabel="Learn more about this purple button"
+    <SafeAreaView style={styles.container}>
+      <FlatList
+        data={DATA}
+        renderItem={renderItem}
+        keyExtractor={(item) => item.id}
       />
-
-      <StatusBar style='auto' />
-    </View>
+    </SafeAreaView>
   );
 };
 
 export default App;
 
-// React Native Styles
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#c4d5ff99',
-    alignItems: 'center',
-    justifyContent: 'center',
+    marginTop: StatusBar.currentHeight || 0,
   },
-  center: {
-    alignItems: 'center',
-    backgroundColor: '#efefef',
+  item: {
+    backgroundColor: '#f0f6f0',
+    padding: 20,
+    marginVertical: 8,
+    marginHorizontal: 16,
+  },
+  title: {
+    fontSize: 32,
   },
 });
