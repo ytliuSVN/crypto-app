@@ -1,4 +1,6 @@
 import React, { useState, useEffect } from 'react';
+import { NavigationContainer } from '@react-navigation/native';
+import { createDrawerNavigator } from '@react-navigation/drawer';
 import {
   StatusBar,
   StyleSheet,
@@ -10,6 +12,9 @@ import {
   TouchableOpacity,
   ActivityIndicator,
 } from 'react-native';
+import MainTabScreen from './screens/MainTabScreen';
+
+const Drawer = createDrawerNavigator();
 
 const App = () => {
   const [data, setData] = useState([]);
@@ -55,16 +60,22 @@ const App = () => {
   };
 
   return (
-    <SafeAreaView style={styles.container}>
-      <FlatList
-        data={data}
-        renderItem={renderItem}
-        keyExtractor={(item, index) => index.toString()}
-        ListFooterComponent={renderFooter}
-        onEndReached={fetchMore}
-        onEndReachedThreshold={0.5}
-      />
-    </SafeAreaView>
+    <NavigationContainer>
+      <Drawer.Navigator initialRouteName='Home'>
+        <Drawer.Screen name='Home' component={MainTabScreen} />
+      </Drawer.Navigator>
+    </NavigationContainer>
+
+    // <SafeAreaView style={styles.container}>
+    //   <FlatList
+    //     data={data}
+    //     renderItem={renderItem}
+    //     keyExtractor={(item, index) => index.toString()}
+    //     ListFooterComponent={renderFooter}
+    //     onEndReached={fetchMore}
+    //     onEndReachedThreshold={0.5}
+    //   />
+    // </SafeAreaView>
   );
 };
 
