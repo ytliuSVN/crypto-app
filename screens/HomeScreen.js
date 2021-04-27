@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
+// import axios from 'axios';
 import {
   StatusBar,
   StyleSheet,
@@ -18,7 +18,6 @@ const HomeScreen = ({ navigation }) => {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(false);
 
-  /*
   useEffect(() => {
     const loadItems = async () => {
       setIsLoading(true);
@@ -32,27 +31,26 @@ const HomeScreen = ({ navigation }) => {
     };
     loadItems();
   }, [page]);
-  */
 
   // use axios to fetch data
-  useEffect(() => {
-    setError(false);
-    setIsLoading(true);
-    try {
-      searchCrypto();
-    } catch (error) {
-      console.log(error);
-      // setError(true);
-    }
-    setIsLoading(false);
-  }, [page]);
+  // useEffect(() => {
+  //   setError(false);
+  //   setIsLoading(true);
+  //   try {
+  //     searchCrypto();
+  //   } catch (error) {
+  //     console.log(error);
+  //     // setError(true);
+  //   }
+  //   setIsLoading(false);
+  // }, [page]);
 
-  const searchCrypto = async () => {
-    const result = await axios(
-      `https://jsonplaceholder.typicode.com/photos?_limit=10&_page=${page}`
-    );
-    setData(data.concat(result.data));
-  };
+  // const searchCrypto = async () => {
+  //   const result = await axios(
+  //     `https://jsonplaceholder.typicode.com/photos?_limit=10&_page=${page}`
+  //   );
+  //   setData(data.concat(result.data));
+  // };
 
   const renderItem = ({ item }) => {
     return (
@@ -73,7 +71,6 @@ const HomeScreen = ({ navigation }) => {
   };
 
   const fetchMore = () => {
-    // increment page for the next call
     setPage(page + 1);
     setIsLoading(true);
   };

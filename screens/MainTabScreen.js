@@ -13,13 +13,16 @@ const HomeStack = createStackNavigator();
 const DetailsStack = createStackNavigator();
 
 const MainTabScreen = () => (
-  <Tab.Navigator initialRouteName='Home' activeColor='#fff'>
+  <Tab.Navigator
+    initialRouteName='Home'
+    activeColor='#fff'
+    barStyle={{ backgroundColor: '#03AE9D' }}
+  >
     <Tab.Screen
       name='Home'
       component={HomeStackScreen}
       options={{
         tabBarLabel: 'Track',
-        tabBarColor: '#851dd6',
         tabBarIcon: ({ color }) => (
           <Icon name='ios-list' color={color} size={26} />
         ),
@@ -30,7 +33,6 @@ const MainTabScreen = () => (
       component={DetailsStackScreen}
       options={{
         tabBarLabel: 'Settings',
-        tabBarColor: '#1f65ff',
         tabBarIcon: ({ color }) => (
           <Icon name='ios-settings' color={color} size={26} />
         ),
@@ -41,7 +43,6 @@ const MainTabScreen = () => (
       component={ProfileScreen}
       options={{
         tabBarLabel: 'Profile',
-        tabBarColor: '#694fad',
         tabBarIcon: ({ color }) => (
           <Icon name='ios-logo-bitcoin' color={color} size={26} />
         ),
@@ -52,7 +53,6 @@ const MainTabScreen = () => (
       component={StatsScreen}
       options={{
         tabBarLabel: 'Stats',
-        tabBarColor: '#d02860',
         tabBarIcon: ({ color }) => (
           <Icon name='ios-stats-chart' color={color} size={26} />
         ),
@@ -67,7 +67,7 @@ const HomeStackScreen = ({ navigation }) => (
   <HomeStack.Navigator
     screenOptions={{
       headerStyle: {
-        backgroundColor: '#851dd6',
+        backgroundColor: '#03AE9D',
       },
       headerTintColor: '#fff',
       headerTitleStyle: {
@@ -84,7 +84,7 @@ const HomeStackScreen = ({ navigation }) => (
           <Icon.Button
             name='ios-menu'
             size={25}
-            backgroundColor='#851dd6'
+            backgroundColor='#03AE9D'
             onPress={() => navigation.openDrawer()}
           ></Icon.Button>
         ),
@@ -97,7 +97,7 @@ const DetailsStackScreen = ({ navigation }) => (
   <DetailsStack.Navigator
     screenOptions={{
       headerStyle: {
-        backgroundColor: '#1f65ff',
+        backgroundColor: '#03AE9D',
       },
       headerTintColor: '#fff',
       headerTitleStyle: {
@@ -113,7 +113,7 @@ const DetailsStackScreen = ({ navigation }) => (
           <Icon.Button
             name='ios-menu'
             size={25}
-            backgroundColor='#1f65ff'
+            backgroundColor='#03AE9D'
             onPress={() => navigation.openDrawer()}
           ></Icon.Button>
         ),
