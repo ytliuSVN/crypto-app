@@ -7,7 +7,7 @@ import Icon from 'react-native-vector-icons/Ionicons';
 
 import HomeScreen from './HomeScreen';
 import DetailsScreen from './DetailsScreen';
-import ExploreScreen from './ExploreScreen';
+import StatsScreen from './StatsScreen';
 import ProfileScreen from './ProfileScreen';
 
 const HomeStack = createStackNavigator();
@@ -21,10 +21,10 @@ const MainTabScreen = () => (
       name='Home'
       component={HomeStackScreen}
       options={{
-        tabBarLabel: 'Home',
-        tabBarColor: '#009387',
+        tabBarLabel: 'All Coins',
+        tabBarColor: '#851dd6',
         tabBarIcon: ({ color }) => (
-          <Icon name='ios-home' color={color} size={26} />
+          <Icon name='ios-list' color={color} size={26} />
         ),
       }}
     />
@@ -32,10 +32,10 @@ const MainTabScreen = () => (
       name='Notifications'
       component={DetailsStackScreen}
       options={{
-        tabBarLabel: 'Updates',
+        tabBarLabel: 'Settings',
         tabBarColor: '#1f65ff',
         tabBarIcon: ({ color }) => (
-          <Icon name='ios-notifications' color={color} size={26} />
+          <Icon name='ios-settings' color={color} size={26} />
         ),
       }}
     />
@@ -46,18 +46,18 @@ const MainTabScreen = () => (
         tabBarLabel: 'Profile',
         tabBarColor: '#694fad',
         tabBarIcon: ({ color }) => (
-          <Icon name='ios-person' color={color} size={26} />
+          <Icon name='ios-logo-bitcoin' color={color} size={26} />
         ),
       }}
     />
     <Tab.Screen
-      name='Explore'
-      component={ExploreScreen}
+      name='Stats'
+      component={StatsScreen}
       options={{
-        tabBarLabel: 'Explore',
+        tabBarLabel: 'Stats',
         tabBarColor: '#d02860',
         tabBarIcon: ({ color }) => (
-          <Icon name='ios-aperture' color={color} size={26} />
+          <Icon name='ios-stats-chart' color={color} size={26} />
         ),
       }}
     />
@@ -70,7 +70,7 @@ const HomeStackScreen = ({ navigation }) => (
   <HomeStack.Navigator
     screenOptions={{
       headerStyle: {
-        backgroundColor: '#009387',
+        backgroundColor: '#851dd6',
       },
       headerTintColor: '#fff',
       headerTitleStyle: {
@@ -82,12 +82,12 @@ const HomeStackScreen = ({ navigation }) => (
       name='Home'
       component={HomeScreen}
       options={{
-        title: 'Overview',
+        title: 'All Coins',
         headerLeft: () => (
           <Icon.Button
             name='ios-menu'
             size={25}
-            backgroundColor='#009387'
+            backgroundColor='#851dd6'
             onPress={() => navigation.openDrawer()}
           ></Icon.Button>
         ),

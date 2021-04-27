@@ -1,5 +1,6 @@
 # Crypto Tracker App
 
+A Crypto Tracker App built using React Native, utilizing [CoinMarketCap API](https://coinmarketcap.com/api/documentation/v1/#tag/exchange) to track the price of cryptocurrencies.
 ## User Stories
 
 ## App Details
