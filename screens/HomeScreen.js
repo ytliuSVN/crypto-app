@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import axios from 'axios';
 import {
   StatusBar,
   StyleSheet,
@@ -13,9 +14,11 @@ import {
 
 const HomeScreen = ({ navigation }) => {
   const [data, setData] = useState([]);
-  const [isLoading, setIsLoading] = useState(false);
   const [page, setPage] = useState(1);
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState(false);
 
+  /*
   useEffect(() => {
     const loadItems = async () => {
       setIsLoading(true);
@@ -29,6 +32,27 @@ const HomeScreen = ({ navigation }) => {
     };
     loadItems();
   }, [page]);
+  */
+
+  // use axios to fetch data
+  useEffect(() => {
+    setError(false);
+    setIsLoading(true);
+    try {
+      searchCrypto();
+    } catch (error) {
+      console.log(error);
+      // setError(true);
+    }
+    setIsLoading(false);
+  }, [page]);
+
+  const searchCrypto = async () => {
+    const result = await axios(
+      `https://jsonplaceholder.typicode.com/photos?_limit=10&_page=${page}`
+    );
+    setData(data.concat(result.data));
+  };
 
   const renderItem = ({ item }) => {
     return (
