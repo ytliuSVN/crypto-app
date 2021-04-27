@@ -1,8 +1,6 @@
 import React from 'react';
-
 import { createMaterialBottomTabNavigator } from '@react-navigation/material-bottom-tabs';
 import { createStackNavigator } from '@react-navigation/stack';
-
 import Icon from 'react-native-vector-icons/Ionicons';
 
 import HomeScreen from './HomeScreen';
@@ -10,10 +8,9 @@ import DetailsScreen from './DetailsScreen';
 import StatsScreen from './StatsScreen';
 import ProfileScreen from './ProfileScreen';
 
+const Tab = createMaterialBottomTabNavigator();
 const HomeStack = createStackNavigator();
 const DetailsStack = createStackNavigator();
-
-const Tab = createMaterialBottomTabNavigator();
 
 const MainTabScreen = () => (
   <Tab.Navigator initialRouteName='Home' activeColor='#fff'>
@@ -29,7 +26,7 @@ const MainTabScreen = () => (
       }}
     />
     <Tab.Screen
-      name='Notifications'
+      name='Settings'
       component={DetailsStackScreen}
       options={{
         tabBarLabel: 'Settings',
