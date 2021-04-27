@@ -18,7 +18,7 @@ const MainTabScreen = () => (
       name='Home'
       component={HomeStackScreen}
       options={{
-        tabBarLabel: 'All Coins',
+        tabBarLabel: 'Track',
         tabBarColor: '#851dd6',
         tabBarIcon: ({ color }) => (
           <Icon name='ios-list' color={color} size={26} />
@@ -79,7 +79,7 @@ const HomeStackScreen = ({ navigation }) => (
       name='Home'
       component={HomeScreen}
       options={{
-        title: 'All Coins',
+        title: 'Track',
         headerLeft: () => (
           <Icon.Button
             name='ios-menu'

@@ -3,6 +3,10 @@
 A Crypto Tracker App built using React Native, utilizing [CoinMarketCap API](https://coinmarketcap.com/api/documentation/v1/#tag/exchange) to track the price of cryptocurrencies.
 ## User Stories
 
+- [ ] The user can request the list of cryptocurrencies from the CoinMarketCap API and see the results collated together.
+- [ ] Progressively load more list items by scrolling down the list.
+- [ ] The user can sort the cryptocurrencies based on their name, price, and volume.
+
 ## App Details
 
 ## Useful links and resources
