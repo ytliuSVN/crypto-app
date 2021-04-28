@@ -73,6 +73,7 @@ const HomeStackScreen = ({ navigation }) => (
       headerTitleStyle: {
         fontWeight: 'bold',
       },
+      headerTitleAlign: 'center'
     }}
   >
     <HomeStack.Screen
@@ -103,6 +104,7 @@ const DetailsStackScreen = ({ navigation }) => (
       headerTitleStyle: {
         fontWeight: 'bold',
       },
+      headerTitleAlign: 'center'
     }}
   >
     <DetailsStack.Screen
@@ -121,3 +123,4 @@ const DetailsStackScreen = ({ navigation }) => (
     />
   </DetailsStack.Navigator>
 );
+

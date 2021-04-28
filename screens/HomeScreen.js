@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-// import axios from 'axios';
+import axios from 'axios';
 import {
   StatusBar,
   StyleSheet,
@@ -39,17 +39,28 @@ const HomeScreen = ({ navigation }) => {
   //   try {
   //     searchCrypto();
   //   } catch (error) {
-  //     console.log(error);
-  //     // setError(true);
+  //     console.error(error);
+  //     setError(true);
   //   }
   //   setIsLoading(false);
   // }, [page]);
 
   // const searchCrypto = async () => {
-  //   const result = await axios(
-  //     `https://jsonplaceholder.typicode.com/photos?_limit=10&_page=${page}`
-  //   );
-  //   setData(data.concat(result.data));
+  //   axios
+  //     .get(
+  //       `https://jsonplaceholder.typicode.com/photos?_limit=10&_page=${page}`
+  //     )
+  //     .then((response) => {
+  //       if (page > 1) {
+  //         let arr = [...data, ...response.data];
+  //         setData(arr);
+  //       } else {
+  //         setData(response.data);
+  //       }
+  //     })
+  //     .catch((error) => {
+  //       console.error('Axios GET request failed');
+  //     });
   // };
 
   const renderItem = ({ item }) => {
@@ -82,8 +93,8 @@ const HomeScreen = ({ navigation }) => {
         renderItem={renderItem}
         keyExtractor={(item, index) => index.toString()}
         ListFooterComponent={renderFooter}
-        onEndReached={fetchMore}
         onEndReachedThreshold={0.5}
+        onEndReached={fetchMore}
       />
     </SafeAreaView>
   );

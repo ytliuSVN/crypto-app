@@ -20,6 +20,7 @@
     "expo-status-bar": "~1.0.4",
     "expo-updates": "~0.5.4",
     "express": "^4.17.1",
+    "faker": "^5.5.3",
     "nodemon": "^2.0.7",
     "react": "16.13.1",
     "react-dom": "16.13.1",
