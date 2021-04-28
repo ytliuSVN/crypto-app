@@ -13,3 +13,4 @@ A Crypto Tracker App built using React Native, utilizing [CoinMarketCap API](htt
 - [Why I’ve built a Coinmarketcap proxy](https://medium.com/@theBliz/why-ive-built-a-coinmarketcap-proxy-e06c898b5765)
 - [Infinite scroll/Paginating FlatList with just hooks and function components](https://medium.com/@srbkrishnan/infinite-scroll-pagination-in-flatlist-with-hooks-and-function-components-c9c08bba23a8)
 - [React Navigation v5 Tutorial Series](https://www.youtube.com/playlist?list=PLQWFhX-gwJbmmqcP-9zMXBaxQbGKfIJY2)
+- [React Native Scroll Item animation effect - FlatList and Animated API](https://www.youtube.com/watch?v=F8x-dyIsrJ8)
