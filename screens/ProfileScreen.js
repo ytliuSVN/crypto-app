@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import {
   StatusBar,
   FlatList,
@@ -35,18 +35,32 @@ const BG_IMG =
 
 const SPACING = 20;
 const AVATAR_SIZE = 70;
+const ITEM_SIZE = AVATAR_SIZE + SPACING * 3;
 
 const ProfileScreen = () => {
+  const scrollY = useRef(new Animated.Value(0)).current;
+
   const renderItem = ({ item, index }) => {
+    const inputRange = [-1, 0, ITEM_SIZE * index, ITEM_SIZE * (index + 2)];
+
+    const scale = scrollY.interpolate({
+      inputRange,
+      outputRange: [1, 1, 1, 0],
+    });
+
     return (
-      <View style={styles.cardList}>
+      <Animated.View
+        style={[styles.cardList,{
+          transform: [{ scale }],
+        }]}
+      >
         <Image style={styles.itemImage} source={{ uri: item.image }} />
         <View>
           <Text style={styles.itemName}>{item.name}</Text>
           <Text style={styles.itemTitle}>{item.jobTitle}</Text>
           <Text style={styles.itemEmail}>{item.email}</Text>
         </View>
-      </View>
+      </Animated.View>
     );
   };
 
@@ -58,8 +72,14 @@ const ProfileScreen = () => {
         blurRadius={10}
         resizeMode='cover'
       />
-      <FlatList
+      <Animated.FlatList
         data={DATA}
+        onScroll={Animated.event(
+          [{ nativeEvent: { contentOffset: { y: scrollY } } }],
+          {
+            useNativeDriver: true,
+          }
+        )}
         renderItem={renderItem}
         keyExtractor={(item) => item.key}
         contentContainerStyle={styles.contentContainer}
@@ -94,6 +114,7 @@ const styles = StyleSheet.create({
     shadowRadius: 20,
     elevation: 3,
     backgroundColor: '#fff',
+    // transform: [{ scale }],
   },
   itemImage: {
     width: AVATAR_SIZE,
