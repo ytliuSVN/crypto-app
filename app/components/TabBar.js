@@ -9,18 +9,21 @@ const TabBar = ({ state, navigation }) => {
   const renderColor = (currentTab) =>
     currentTab === selected ? '#03AE9D' : 'black';
 
-  const handlePress = (activeTab) => {
-    setSelected(activeTab);
+  const handlePress = (activeTab, index) => {
+    if (state.index !== index) {
+      setSelected(activeTab);
+      navigation.navigate(activeTab);
+    }
   };
 
   return (
     <View style={styles.wrapper}>
       <View style={styles.container}>
-        {routes.map((route) => (
+        {routes.map((route, index) => (
           <Tab
             tab={route}
-            //   icon={}
-            onPress={() => handlePress(route.name)}
+            icon={route.params.icon}
+            onPress={() => handlePress(route.name, index)}
             color={renderColor(route.name)}
             key={route.key}
           />
@@ -46,5 +49,6 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
     width: 250,
     borderRadius: 100,
+    elevation: 2,
   },
 });
