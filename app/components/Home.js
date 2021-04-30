@@ -1,11 +1,22 @@
 import React from 'react';
-import { View, Text, Button, StyleSheet } from 'react-native';
+import { StatusBar, StyleSheet, SafeAreaView, Image } from 'react-native';
+import CoinList from './CoinList';
+
+const wallpaperImage = {
+  image: require('../../assets/wallpaper.jpeg'),
+};
 
 const Home = () => {
   return (
-    <View style={styles.container}>
-      <Text style={styles.text}>111</Text>
-    </View>
+    <SafeAreaView style={styles.container}>
+      <Image
+        style={styles.itemBGImage}
+        source={wallpaperImage.image}
+        blurRadius={10}
+        resizeMode='cover'
+      />
+      <CoinList />
+    </SafeAreaView>
   );
 };
 
@@ -13,14 +24,11 @@ export default Home;
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
-    backgroundColor: '#76a6ef',
+    padding: 20,
+    marginTop: StatusBar.currentHeight || 48,
+    paddingBottom: 80,
   },
-  text: {
-    fontSize: 20,
-    fontWeight: 'bold',
-    color: '#fff',
+  itemBGImage: {
+    ...StyleSheet.absoluteFillObject,
   },
 });
