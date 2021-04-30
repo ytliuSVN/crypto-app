@@ -25,7 +25,7 @@ export default Home;
 const styles = StyleSheet.create({
   container: {
     padding: 20,
-    marginTop: StatusBar.currentHeight || 48,
+    // marginTop: StatusBar.currentHeight || 48,
     paddingBottom: 80,
   },
   itemBGImage: {

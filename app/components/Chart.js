@@ -1,15 +1,15 @@
 import React from 'react';
 import { View, Text, Button, StyleSheet } from 'react-native';
 
-const Create = () => {
+const Chart = () => {
   return (
     <View style={styles.container}>
-      <Text style={styles.text}>222</Text>
+      <Text style={styles.text}>Let's Draw!</Text>
     </View>
   );
 };
 
-export default Create;
+export default Chart;
 
 const styles = StyleSheet.create({
   container: {

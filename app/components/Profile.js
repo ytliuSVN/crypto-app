@@ -4,7 +4,7 @@ import { View, Text, Button, StyleSheet } from 'react-native';
 const Profile = ({ navigation }) => {
   return (
     <View style={styles.container}>
-      <Text style={styles.text}>333</Text>
+      <Text style={styles.text}>Developer Mode</Text>
       <Button
         onPress={() => navigation.navigate('Details')}
         title='move to another screen!'

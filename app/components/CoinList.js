@@ -20,7 +20,7 @@ const SPACING = 20;
 const AVATAR_SIZE = 70;
 const ITEM_SIZE = AVATAR_SIZE + SPACING * 3;
 
-const CoinList = () => {
+const CoinList = ({ navigation }) => {
   const scrollY = useRef(new Animated.Value(0)).current;
 
   const renderItem = ({ item, index }) => {
@@ -29,7 +29,7 @@ const CoinList = () => {
       -1,
       0,
       ITEM_SIZE * index,
-      ITEM_SIZE * (index + 0.5),
+      ITEM_SIZE * (index + 0.8),
     ];
 
     const scale = scrollY.interpolate({
@@ -51,6 +51,7 @@ const CoinList = () => {
             opacity,
           },
         ]}
+        // onPress={() => navigation.navigate('Details')}
       >
         <Image style={styles.itemImage} source={{ uri: item.image }} />
         <View>

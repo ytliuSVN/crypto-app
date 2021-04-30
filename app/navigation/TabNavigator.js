@@ -1,9 +1,9 @@
 import React from 'react';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import Home from '../components/Home';
-import Create from '../components/Create';
-import ProfileNavigator from '../navigation/ProfileNavigator';
+import Chart from '../components/Chart';
 import TabBar from '../components/TabBar';
+import ProfileNavigator from '../navigation/ProfileNavigator';
+import TrackNavigator from '../navigation/TrackNavigator';
 
 const Tab = createBottomTabNavigator();
 
@@ -12,12 +12,12 @@ const TabNavigator = () => {
     <Tab.Navigator tabBar={(props) => <TabBar {...props} />}>
       <Tab.Screen
         name='Track'
-        component={Home}
+        component={TrackNavigator}
         initialParams={{ icon: 'eye' }}
       />
       <Tab.Screen
         name='Stats'
-        component={Create}
+        component={Chart}
         initialParams={{ icon: 'linechart' }}
       />
       <Tab.Screen

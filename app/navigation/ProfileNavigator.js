@@ -1,5 +1,4 @@
 import React from 'react';
-import { StatusBar, StyleSheet, SafeAreaView, View, Image } from 'react-native';
 import { createStackNavigator } from '@react-navigation/stack';
 import Profile from '../components/Profile';
 import Details from '../components/Details';
