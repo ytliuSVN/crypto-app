@@ -1,28 +1,26 @@
 import React from 'react';
 import { View, Text, Button, StyleSheet } from 'react-native';
 
-const Profile = ({ navigation }) => {
+const Details = () => {
   return (
     <View style={styles.container}>
-      <Text style={styles.text}>333</Text>
-      <Button
-        onPress={() => navigation.navigate('Details')}
-        title='move to another screen!'
-      />
+      <Text style={styles.text}>Details</Text>
     </View>
   );
 };
 
-export default Profile;
+export default Details;
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
+    backgroundColor: '#76a6ef',
   },
   text: {
     fontSize: 20,
     fontWeight: 'bold',
+    color: '#FFF',
   },
 });
