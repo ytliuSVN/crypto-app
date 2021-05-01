@@ -2,8 +2,8 @@ import React from 'react';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import Chart from '../components/Chart';
 import TabBar from '../components/TabBar';
-import ProfileNavigator from '../navigation/ProfileNavigator';
 import TrackNavigator from '../navigation/TrackNavigator';
+import ProfileNavigator from '../navigation/ProfileNavigator';
 
 const Tab = createBottomTabNavigator();
 

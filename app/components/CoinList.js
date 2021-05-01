@@ -1,6 +1,15 @@
 import React, { useRef } from 'react';
-import { Image, Animated, Text, View, StyleSheet } from 'react-native';
+import {
+  Image,
+  Animated,
+  Text,
+  View,
+  StyleSheet,
+  Pressable,
+} from 'react-native';
 import faker from 'faker';
+
+const AnimatedPressable = Animated.createAnimatedComponent(Pressable);
 
 faker.seed(10);
 const DATA = [...Array(30).keys()].map((_, i) => {
@@ -20,7 +29,7 @@ const SPACING = 20;
 const AVATAR_SIZE = 70;
 const ITEM_SIZE = AVATAR_SIZE + SPACING * 3;
 
-const CoinList = ({ navigation }) => {
+const CoinList = () => {
   const scrollY = useRef(new Animated.Value(0)).current;
 
   const renderItem = ({ item, index }) => {
@@ -43,7 +52,7 @@ const CoinList = ({ navigation }) => {
     });
 
     return (
-      <Animated.View
+      <AnimatedPressable
         style={[
           styles.cardList,
           {
@@ -51,7 +60,7 @@ const CoinList = ({ navigation }) => {
             opacity,
           },
         ]}
-        // onPress={() => navigation.navigate('Details')}
+        onPress={() => alert(`test onPress: ${item.key}`)}
       >
         <Image style={styles.itemImage} source={{ uri: item.image }} />
         <View>
@@ -59,7 +68,7 @@ const CoinList = ({ navigation }) => {
           <Text style={styles.itemTitle}>{item.jobTitle}</Text>
           <Text style={styles.itemEmail}>{item.email}</Text>
         </View>
-      </Animated.View>
+      </AnimatedPressable>
     );
   };
 
