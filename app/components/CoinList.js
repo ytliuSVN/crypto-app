@@ -20,8 +20,12 @@ const DATA = [...Array(30).keys()].map((_, i) => {
       'men',
     ])}/${faker.datatype.number(60)}.jpg`,
     name: faker.name.findName(),
+    symbol: faker.vehicle.vrm(),
     jobTitle: faker.name.jobTitle(),
     email: faker.internet.email(),
+    commerce: faker.commerce.price(),
+    volume:
+      faker.datatype.number({ min: 3, max: 100 }) * faker.datatype.number(),
   };
 });
 
@@ -64,9 +68,11 @@ const CoinList = () => {
       >
         <Image style={styles.itemImage} source={{ uri: item.image }} />
         <View>
-          <Text style={styles.itemName}>{item.name}</Text>
-          <Text style={styles.itemTitle}>{item.jobTitle}</Text>
-          <Text style={styles.itemEmail}>{item.email}</Text>
+          <Text style={styles.baseText}>
+            {item.name} <Text style={styles.innerText}>{item.symbol}</Text>
+          </Text>
+          <Text style={styles.itemPrice}>&euro;{item.commerce}</Text>
+          <Text style={styles.itemVolume}>&euro;{item.volume}</Text>
         </View>
       </AnimatedPressable>
     );
@@ -111,17 +117,22 @@ const styles = StyleSheet.create({
     borderRadius: AVATAR_SIZE,
     marginRight: SPACING / 2,
   },
-  itemName: {
-    fontSize: 22,
-    fontWeight: '700',
-  },
-  itemTitle: {
+  itemPrice: {
     fontSize: 16,
     opacity: 0.7,
   },
-  itemEmail: {
+  itemVolume: {
     fontSize: 14,
     opacity: 0.8,
     color: '#03AE9D',
+  },
+  baseText: {
+    fontSize: 22,
+    fontWeight: '700',
+  },
+  innerText: {
+    fontSize: 14,
+    color: '#9fa6ad',
+    fontWeight: 'normal',
   },
 });
