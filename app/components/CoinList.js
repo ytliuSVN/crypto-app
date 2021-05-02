@@ -1,4 +1,4 @@
-import React, { useRef } from 'react';
+import React, { useRef, useState, useEffect } from 'react';
 import {
   Image,
   Animated,
@@ -6,6 +6,7 @@ import {
   View,
   StyleSheet,
   Pressable,
+  ActivityIndicator,
 } from 'react-native';
 import faker from 'faker';
 
@@ -19,10 +20,8 @@ const DATA = [...Array(30).keys()].map((_, i) => {
       'women',
       'men',
     ])}/${faker.datatype.number(60)}.jpg`,
-    name: faker.name.findName(),
-    symbol: faker.vehicle.vrm(),
-    jobTitle: faker.name.jobTitle(),
-    email: faker.internet.email(),
+    name: faker.vehicle.vrm(),
+    symbol: faker.finance.currencyCode(),
     commerce:
       faker.commerce.price() * faker.datatype.number({ min: 1, max: 50 }),
     volume:
@@ -35,6 +34,10 @@ const AVATAR_SIZE = 70;
 const ITEM_SIZE = AVATAR_SIZE + SPACING * 3;
 
 const CoinList = () => {
+  // const [data, setData] = useState([]);
+  // const [offset, setOffset] = useState(1);
+  const [loading, setLoading] = useState(false);
+
   const scrollY = useRef(new Animated.Value(0)).current;
 
   const renderItem = ({ item, index }) => {
@@ -89,6 +92,26 @@ const CoinList = () => {
     );
   };
 
+  const renderFooter = () => {
+    return (
+      <View style={styles.footer}>
+        {loading ? (
+          <ActivityIndicator
+            style={styles.loader}
+            size='large'
+            color='#03AE9D'
+          />
+        ) : // <Image
+        //   style={styles.loader}
+        //   source={require('../../assets/spinner.gif')}
+        //   resizeMode='contain'
+        //   resizeMethod='resize'
+        // />
+        null}
+      </View>
+    );
+  };
+
   return (
     <Animated.FlatList
       data={DATA}
@@ -100,6 +123,8 @@ const CoinList = () => {
       )}
       renderItem={renderItem}
       keyExtractor={(item) => item.key}
+      ListFooterComponent={renderFooter}
+      onEndReachedThreshold={0.5}
     />
   );
 };
@@ -145,5 +170,15 @@ const styles = StyleSheet.create({
     fontSize: 14,
     color: '#9fa6ad',
     fontWeight: 'normal',
+  },
+  footer: {
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  loader: {
+    padding: SPACING / 2,
+    justifyContent: 'space-around',
+    width: AVATAR_SIZE,
+    height: AVATAR_SIZE,
   },
 });

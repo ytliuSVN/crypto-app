@@ -2,16 +2,12 @@ import React from 'react';
 import { StatusBar, StyleSheet, SafeAreaView, Image } from 'react-native';
 import CoinList from './CoinList';
 
-const wallpaperImage = {
-  image: require('../../assets/wallpaper.jpeg'),
-};
-
 const Home = () => {
   return (
     <SafeAreaView style={styles.container}>
       <Image
         style={styles.itemBGImage}
-        source={wallpaperImage.image}
+        source={require('../../assets/wallpaper.jpeg')}
         blurRadius={10}
         resizeMode='cover'
       />
