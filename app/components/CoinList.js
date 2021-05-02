@@ -23,7 +23,8 @@ const DATA = [...Array(30).keys()].map((_, i) => {
     symbol: faker.vehicle.vrm(),
     jobTitle: faker.name.jobTitle(),
     email: faker.internet.email(),
-    commerce: faker.commerce.price(),
+    commerce:
+      faker.commerce.price() * faker.datatype.number({ min: 1, max: 50 }),
     volume:
       faker.datatype.number({ min: 3, max: 100 }) * faker.datatype.number(),
   };
@@ -55,6 +56,12 @@ const CoinList = () => {
       outputRange: [1, 1, 1, 0],
     });
 
+    const numberFormat = (num) => {
+      return num.toString().replace(/^[+-]?\d+/, (int) => {
+        return int.replace(/(\d)(?=(\d{3})+$)/g, '$1,');
+      });
+    };
+
     return (
       <AnimatedPressable
         style={[
@@ -71,8 +78,12 @@ const CoinList = () => {
           <Text style={styles.baseText}>
             {item.name} <Text style={styles.innerText}>{item.symbol}</Text>
           </Text>
-          <Text style={styles.itemPrice}>&euro;{item.commerce}</Text>
-          <Text style={styles.itemVolume}>&euro;{item.volume}</Text>
+          <Text style={styles.itemPrice}>
+            &euro;{numberFormat(item.commerce)}
+          </Text>
+          <Text style={styles.itemVolume}>
+            &euro;{numberFormat(item.volume)}
+          </Text>
         </View>
       </AnimatedPressable>
     );
