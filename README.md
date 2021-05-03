@@ -11,9 +11,9 @@ A Crypto Tracker App built using React Native, utilizing [CoinMarketCap API](htt
 
 ### Screenshots
 
-| Splash Screen | Prices by Market Cap  | Detail Screen |
-| :-:  | :-: | :-: |
-| **WIP** | **WIP** ![Prices Screen](./assets/screenshot/prices.png) | **WIP** ![Detail Screen](./assets/screenshot/detail.png) |
+| Prices by Market Cap  | Detail Screen |
+| :-: | :-: |
+| ![Prices Screen](./assets/screenshot/prices.png) | ![Detail Screen](./assets/screenshot/detail.png) |
 
 ### Loading Environment Variables
 
