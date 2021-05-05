@@ -9,6 +9,7 @@ import {
   Modal,
 } from 'react-native';
 import ModalPicker from './ModalPicker';
+import FloatingButton from './FloatingButton';
 
 const Profile = ({ navigation }) => {
   const [chooseData, setChooseData] = useState('Sort by...');
@@ -23,6 +24,11 @@ const Profile = ({ navigation }) => {
 
   return (
     <View style={styles.container}>
+      <FloatingButton
+        icon='funnel-outline'
+        color='white'
+        onPress={() => changeModalVisibility(true)}
+      />
       <Button
         onPress={() => navigation.navigate('Details')}
         title='move to another screen!'
