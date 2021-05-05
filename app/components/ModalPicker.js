@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useMemo, useCallback } from 'react';
 import {
   View,
   StyleSheet,
@@ -10,9 +10,16 @@ import {
 
 const OPTIONS = ['name', 'price', 'volume'];
 const WIDTH = Dimensions.get('window').width;
-const HEIGHT = Dimensions.get('window').height;
 
 const ModalPicker = (props) => {
+  const [isSelected, setSelected] = useState(false);
+  const color = useMemo(() => {
+    return isSelected ? '#03AE9D' : '#676767a1';
+  }, [isSelected]);
+  const onPressCallback = useCallback(() => {
+    setSelected((prev) => !prev);
+  }, [setSelected]);
+
   const onPressItem = (option) => {
     props.changeModalVisibility(false);
     props.setData(option);
@@ -21,11 +28,13 @@ const ModalPicker = (props) => {
   const option = OPTIONS.map((item, index) => {
     return (
       <TouchableOpacity
-        style={styles.option}
+        style={
+          index === OPTIONS.length - 1 ? styles.noBorderOption : styles.option
+        }
         key={index}
         onPress={() => onPressItem(item)}
       >
-        <Text style={styles.text}>{item}</Text>
+        <Text style={[styles.text, { color }]}>{item}</Text>
       </TouchableOpacity>
     );
   });
@@ -43,11 +52,17 @@ const ModalPicker = (props) => {
 };
 export default ModalPicker;
 
+const borderBottomStyle = {
+  borderBottomColor: 'black',
+  borderBottomWidth: StyleSheet.hairlineWidth,
+};
+
 const styles = StyleSheet.create({
   container: {
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
+    backgroundColor: 'rgba(29, 29, 29, 0.8)',
   },
   modal: {
     backgroundColor: 'white',
@@ -55,6 +70,10 @@ const styles = StyleSheet.create({
     width: WIDTH - 20,
   },
   option: {
+    ...borderBottomStyle,
+    alignItems: 'center',
+  },
+  noBorderOption: {
     alignItems: 'center',
   },
   text: {
