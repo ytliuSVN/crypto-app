@@ -8,34 +8,13 @@ import {
   Pressable,
   ActivityIndicator,
 } from 'react-native';
-import faker from 'faker';
 
 const AnimatedPressable = Animated.createAnimatedComponent(Pressable);
-
-faker.seed(10);
-const DATA = [...Array(30).keys()].map((_, i) => {
-  return {
-    key: faker.datatype.uuid(),
-    image: `https://randomuser.me/api/portraits/${faker.helpers.randomize([
-      'women',
-      'men',
-    ])}/${faker.datatype.number(60)}.jpg`,
-    name: faker.vehicle.vrm(),
-    symbol: faker.finance.currencyCode(),
-    commerce:
-      faker.commerce.price() * faker.datatype.number({ min: 1, max: 50 }),
-    volume:
-      faker.datatype.number({ min: 3, max: 100 }) * faker.datatype.number(),
-  };
-});
-
 const SPACING = 20;
 const AVATAR_SIZE = 70;
 const ITEM_SIZE = AVATAR_SIZE + SPACING * 3;
 
-const CoinList = () => {
-  // const [data, setData] = useState([]);
-  // const [offset, setOffset] = useState(1);
+const CoinList = ({ data }) => {
   const [loading, setLoading] = useState(false);
 
   const scrollY = useRef(new Animated.Value(0)).current;
@@ -74,7 +53,7 @@ const CoinList = () => {
             opacity,
           },
         ]}
-        onPress={() => alert(`test onPress: ${item.key}`)}
+        onPress={() => alert(`test onPress: ${item.id}`)}
       >
         <Image style={styles.itemImage} source={{ uri: item.image }} />
         <View>
@@ -82,10 +61,10 @@ const CoinList = () => {
             {item.name} <Text style={styles.innerText}>{item.symbol}</Text>
           </Text>
           <Text style={styles.itemPrice}>
-            &euro;{numberFormat(item.commerce)}
+            &euro;{numberFormat(item.current_price)}
           </Text>
           <Text style={styles.itemVolume}>
-            &euro;{numberFormat(item.volume)}
+            &euro;{numberFormat(item.total_volume)}
           </Text>
         </View>
       </AnimatedPressable>
@@ -114,7 +93,7 @@ const CoinList = () => {
 
   return (
     <Animated.FlatList
-      data={DATA}
+      data={data}
       onScroll={Animated.event(
         [{ nativeEvent: { contentOffset: { y: scrollY } } }],
         {
@@ -122,7 +101,7 @@ const CoinList = () => {
         }
       )}
       renderItem={renderItem}
-      keyExtractor={(item) => item.key}
+      keyExtractor={(item) => item.id}
       ListFooterComponent={renderFooter}
       onEndReachedThreshold={0.5}
     />
@@ -167,9 +146,10 @@ const styles = StyleSheet.create({
     fontWeight: '700',
   },
   innerText: {
-    fontSize: 14,
+    fontSize: 18,
     color: '#9fa6ad',
     fontWeight: 'normal',
+    textTransform: 'uppercase',
   },
   footer: {
     justifyContent: 'center',
