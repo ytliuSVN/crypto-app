@@ -17,10 +17,10 @@ A Crypto Tracker App built using React Native, utilizing [**CoinGecko API**](htt
 
 ### Loading Environment Variables
 
+In the root directory/top-level of your app, create a `.env` file.
+
 ```
-API_URL=https://pro-api.coinmarketcap.com
-CMC_API_KEY=
-PORT=8051
+COINGECKO_URL=https://api.coingecko.com
 ```
 
 ## Useful links and resources
@@ -28,3 +28,4 @@ PORT=8051
 - [Infinite scroll/Paginating FlatList with just hooks and function components](https://medium.com/@srbkrishnan/infinite-scroll-pagination-in-flatlist-with-hooks-and-function-components-c9c08bba23a8)
 - [React Native Scroll Item animation effect - FlatList and Animated API](https://www.youtube.com/watch?v=F8x-dyIsrJ8)
 - [CryptoTracker](https://github.com/SpiralDevelopment/CryptoTracker)
+- [How to Properly Use Environment Variables in an Expo React Native App](https://medium.com/swlh/how-to-properly-use-environment-variables-in-an-expo-react-native-app-7ab852590b30#:~:text=An%20environment%20variable%20is%20a,to%20be%20imported%20at%20all.)
