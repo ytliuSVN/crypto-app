@@ -9,12 +9,15 @@ import {
   StyleSheet,
   Pressable,
   ActivityIndicator,
+  Dimensions,
 } from 'react-native';
+import { AntDesign } from '@expo/vector-icons';
 
 const AnimatedPressable = Animated.createAnimatedComponent(Pressable);
 const SPACING = 20;
 const AVATAR_SIZE = 70;
 const ITEM_SIZE = AVATAR_SIZE + SPACING * 3;
+const WIDTH = Dimensions.get('window').width;
 
 const CoinList = () => {
   const [coins, setCoins] = useState([]);
@@ -35,8 +38,9 @@ const CoinList = () => {
   }, [page]);
 
   const fetchCrypto = async () => {
-    const qs = `vs_currency=eur&order=market_cap_desc&per_page=25&page=${page}&sparkline=false`;
-    const baseUrl = `${COINGECKO_URL}/api/v3/coins/markets?${qs}`;
+    const perPage = 25;
+    const urlParams = `vs_currency=eur&order=market_cap_desc&per_page=${perPage}&page=${page}&sparkline=false`;
+    const baseUrl = `${COINGECKO_URL}/api/v3/coins/markets?${urlParams}`;
 
     axios
       .get(baseUrl)
@@ -60,7 +64,7 @@ const CoinList = () => {
       -1,
       0,
       ITEM_SIZE * index,
-      ITEM_SIZE * (index + 0.8),
+      ITEM_SIZE * (index + 1.2),
     ];
 
     const scale = scrollY.interpolate({
@@ -79,6 +83,28 @@ const CoinList = () => {
       });
     };
 
+    const percentageFormat = (num) => {
+      return (Math.round(num * 100) / 100).toFixed(2);
+    };
+
+    const renderPriceChange = (price) => {
+      if (price > 0) {
+        return (
+          <Text style={styles.rise}>
+            <AntDesign name='caretup' color='#08cc56' size={14} />{' '}
+            {percentageFormat(item.price_change_percentage_24h)}%
+          </Text>
+        );
+      } else {
+        return (
+          <Text style={styles.drop}>
+            <AntDesign name='caretdown' color='#ff252c' size={14} />{' '}
+            {percentageFormat(item.price_change_percentage_24h)}%
+          </Text>
+        );
+      }
+    };
+
     return (
       <AnimatedPressable
         style={[
@@ -91,16 +117,19 @@ const CoinList = () => {
         onPress={() => alert(`test onPress: ${item.id}`)}
       >
         <Image style={styles.itemImage} source={{ uri: item.image }} />
-        <View>
+        <View style={styles.wrapper}>
           <Text style={styles.baseText}>
             {item.name} <Text style={styles.innerText}>{item.symbol}</Text>
           </Text>
           <Text style={styles.itemPrice}>
             &euro;{numberFormat(item.current_price)}
           </Text>
-          <Text style={styles.itemVolume}>
-            &euro;{numberFormat(item.total_volume)}
-          </Text>
+          <View style={styles.combo}>
+            <Text style={styles.itemVolume}>
+              &euro;{numberFormat(item.total_volume)}
+            </Text>
+            {renderPriceChange(item.price_change_percentage_24h)}
+          </View>
         </View>
       </AnimatedPressable>
     );
@@ -115,13 +144,7 @@ const CoinList = () => {
             size='large'
             color='#03AE9D'
           />
-        ) : // <Image
-        //   style={styles.loader}
-        //   source={require('../../assets/spinner.gif')}
-        //   resizeMode='contain'
-        //   resizeMethod='resize'
-        // />
-        null}
+        ) : null}
       </View>
     );
   };
@@ -173,6 +196,10 @@ const styles = StyleSheet.create({
     borderRadius: AVATAR_SIZE,
     marginRight: SPACING / 2,
   },
+  wrapper: {
+    flex: 1,
+    marginRight: SPACING,
+  },
   itemPrice: {
     fontSize: 16,
     opacity: 0.7,
@@ -201,5 +228,15 @@ const styles = StyleSheet.create({
     justifyContent: 'space-around',
     width: AVATAR_SIZE,
     height: AVATAR_SIZE,
+  },
+  combo: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+  },
+  rise: {
+    color: '#08cc56',
+  },
+  drop: {
+    color: '#ff252c',
   },
 });
