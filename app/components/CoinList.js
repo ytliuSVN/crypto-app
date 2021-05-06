@@ -91,7 +91,7 @@ const CoinList = () => {
       if (price > 0) {
         return (
           <Text style={styles.rise}>
-            <AntDesign name='caretup' color='#08cc56' size={14} />{' '}
+            <AntDesign name='caretup' color='#03AE9D' size={14} />{' '}
             {percentageFormat(item.price_change_percentage_24h)}%
           </Text>
         );
@@ -121,12 +121,12 @@ const CoinList = () => {
           <Text style={styles.baseText}>
             {item.name} <Text style={styles.innerText}>{item.symbol}</Text>
           </Text>
-          <Text style={styles.itemPrice}>
-            &euro;{numberFormat(item.current_price)}
+          <Text style={styles.itemVolume}>
+            &euro;{numberFormat(item.total_volume)}
           </Text>
           <View style={styles.combo}>
-            <Text style={styles.itemVolume}>
-              &euro;{numberFormat(item.total_volume)}
+            <Text style={styles.itemPrice}>
+              &euro;{numberFormat(item.current_price)}
             </Text>
             {renderPriceChange(item.price_change_percentage_24h)}
           </View>
@@ -206,7 +206,6 @@ const styles = StyleSheet.create({
   },
   itemVolume: {
     fontSize: 14,
-    opacity: 0.8,
     color: '#03AE9D',
   },
   baseText: {
@@ -234,7 +233,7 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
   },
   rise: {
-    color: '#08cc56',
+    color: '#03AE9D',
   },
   drop: {
     color: '#ff252c',
