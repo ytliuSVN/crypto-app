@@ -27,14 +27,14 @@ const Profile = ({ navigation }) => {
       <FloatingButton
         icon='funnel-outline'
         color='white'
-        onPress={() => changeModalVisibility(true)}
+        // onPress={() => changeModalVisibility(true)}
       />
       <Button
         onPress={() => navigation.navigate('Details')}
         title='move to another screen!'
       />
       <TouchableOpacity
-        onPress={() => changeModalVisibility(true)}
+        // onPress={() => changeModalVisibility(true)}
         style={styles.touchableOpacity}
       >
         <Text style={styles.text}>{chooseData}</Text>

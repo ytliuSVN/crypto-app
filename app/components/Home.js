@@ -1,8 +1,26 @@
-import React from 'react';
-import { StatusBar, StyleSheet, SafeAreaView, Image } from 'react-native';
+import React, { useState } from 'react';
+import {
+  StatusBar,
+  StyleSheet,
+  SafeAreaView,
+  Image,
+  Modal,
+} from 'react-native';
 import CoinList from './CoinList';
+import ModalPicker from './ModalPicker';
+import FloatingButton from './FloatingButton';
 
 const Home = () => {
+  const [chooseData, setChooseData] = useState('Sort by...');
+  const [modalVisible, setModalVisible] = useState(false);
+  const changeModalVisibility = (bool) => {
+    setModalVisible(bool);
+  };
+
+  const setData = (option) => {
+    setChooseData(option);
+  };
+
   return (
     <SafeAreaView style={styles.container}>
       <Image
@@ -11,6 +29,22 @@ const Home = () => {
         blurRadius={10}
         resizeMode='cover'
       />
+      <FloatingButton
+        icon='funnel-outline'
+        color='white'
+        onPress={() => changeModalVisibility(true)}
+      />
+      <Modal
+        transparent={true}
+        animationType='fade'
+        visible={modalVisible}
+        onRequestClose={() => changeModalVisibility(false)}
+      >
+        <ModalPicker
+          changeModalVisibility={changeModalVisibility}
+          setData={setData}
+        />
+      </Modal>
       <CoinList />
     </SafeAreaView>
   );
