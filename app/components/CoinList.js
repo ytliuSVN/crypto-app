@@ -1,4 +1,6 @@
 import React, { useRef, useState, useEffect } from 'react';
+import axios from 'axios';
+import { COINGECKO_URL } from '@env';
 import {
   Image,
   Animated,
@@ -14,8 +16,41 @@ const SPACING = 20;
 const AVATAR_SIZE = 70;
 const ITEM_SIZE = AVATAR_SIZE + SPACING * 3;
 
-const CoinList = ({ data }) => {
+const CoinList = () => {
+  const [coins, setCoins] = useState([]);
+  const [page, setPage] = useState(1);
   const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(false);
+
+  useEffect(() => {
+    setError(false);
+    setLoading(true);
+    try {
+      fetchCrypto();
+    } catch (error) {
+      console.error(error);
+      setError(true);
+    }
+    setLoading(false);
+  }, [page]);
+
+  const fetchCrypto = async () => {
+    const qs = `vs_currency=eur&order=market_cap_desc&per_page=25&page=${page}&sparkline=false`;
+    const baseUrl = `${COINGECKO_URL}/api/v3/coins/markets?${qs}`;
+
+    axios
+      .get(baseUrl)
+      .then((res) => {
+        if (page > 1) {
+          setCoins([...data, ...res.data]);
+        } else {
+          setCoins(res.data);
+        }
+      })
+      .catch((error) => {
+        console.error('Axios GET request failed');
+      });
+  };
 
   const scrollY = useRef(new Animated.Value(0)).current;
 
@@ -91,9 +126,14 @@ const CoinList = ({ data }) => {
     );
   };
 
+  const fetchMore = () => {
+    // setPage(page + 1);
+    setLoading(true);
+  };
+
   return (
     <Animated.FlatList
-      data={data}
+      data={coins}
       onScroll={Animated.event(
         [{ nativeEvent: { contentOffset: { y: scrollY } } }],
         {
@@ -104,6 +144,7 @@ const CoinList = ({ data }) => {
       keyExtractor={(item) => item.id}
       ListFooterComponent={renderFooter}
       onEndReachedThreshold={0.5}
+      onEndReached={fetchMore}
     />
   );
 };
