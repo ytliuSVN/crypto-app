@@ -11,14 +11,14 @@ import ModalPicker from './ModalPicker';
 import FloatingButton from './FloatingButton';
 
 const Home = ({ navigation }) => {
-  const [chooseData, setChooseData] = useState('Sort by...');
+  const [sortTarget, setSortTarget] = useState(null);
   const [modalVisible, setModalVisible] = useState(false);
   const changeModalVisibility = (bool) => {
     setModalVisible(bool);
   };
 
   const setData = (option) => {
-    setChooseData(option);
+    setSortTarget(option);
   };
 
   return (

@@ -18,7 +18,6 @@ const AVATAR_SIZE = 70;
 const ITEM_SIZE = AVATAR_SIZE + SPACING * 3;
 
 const CoinList = ({ navigation }) => {
-  console.log(navigation);
   const [coins, setCoins] = useState([]);
   const [page, setPage] = useState(1);
   const [loading, setLoading] = useState(false);
@@ -90,14 +89,14 @@ const CoinList = ({ navigation }) => {
       if (price > 0) {
         return (
           <Text style={styles.rise}>
-            <AntDesign name='caretup' color='#03AE9D' size={14} />{' '}
+            <AntDesign name='caretup' color='#03AE9D' size={10} />{' '}
             {percentageFormat(item.price_change_percentage_24h)}%
           </Text>
         );
       } else {
         return (
           <Text style={styles.drop}>
-            <AntDesign name='caretdown' color='#ff252c' size={14} />{' '}
+            <AntDesign name='caretdown' color='#ff252c' size={10} />{' '}
             {percentageFormat(item.price_change_percentage_24h)}%
           </Text>
         );
@@ -113,8 +112,7 @@ const CoinList = ({ navigation }) => {
             opacity,
           },
         ]}
-        onPress={() => navigation.navigate('Detail')}
-        // onPress={() => alert(`test onPress: ${item.id}`)}
+        onPress={() => navigation.navigate('Detail', { itemId: `${item.id}` })}
       >
         <Image style={styles.itemImage} source={{ uri: item.image }} />
         <View style={styles.wrapper}>
@@ -248,8 +246,10 @@ const styles = StyleSheet.create({
   },
   rise: {
     color: '#03AE9D',
+    fontSize: 16,
   },
   drop: {
     color: '#ff252c',
+    fontSize: 16,
   },
 });
