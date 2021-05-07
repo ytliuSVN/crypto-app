@@ -9,7 +9,6 @@ import {
   StyleSheet,
   Pressable,
   ActivityIndicator,
-  Dimensions,
 } from 'react-native';
 import { AntDesign } from '@expo/vector-icons';
 
@@ -17,7 +16,6 @@ const AnimatedPressable = Animated.createAnimatedComponent(Pressable);
 const SPACING = 20;
 const AVATAR_SIZE = 70;
 const ITEM_SIZE = AVATAR_SIZE + SPACING * 3;
-const WIDTH = Dimensions.get('window').width;
 
 const CoinList = () => {
   const [coins, setCoins] = useState([]);
@@ -46,7 +44,7 @@ const CoinList = () => {
       .get(baseUrl)
       .then((res) => {
         if (page > 1) {
-          setCoins([...data, ...res.data]);
+          setCoins([...coins, ...res.data]);
         } else {
           setCoins(res.data);
         }
@@ -118,9 +116,16 @@ const CoinList = () => {
       >
         <Image style={styles.itemImage} source={{ uri: item.image }} />
         <View style={styles.wrapper}>
-          <Text style={styles.baseText}>
-            {item.name} <Text style={styles.innerText}>{item.symbol}</Text>
-          </Text>
+          <View style={styles.coinText}>
+            <Text
+              style={styles.baseText}
+              ellipsizeMode='tail'
+              numberOfLines={1}
+            >
+              {item.name}
+            </Text>
+            <Text style={styles.innerText}>{item.symbol}</Text>
+          </View>
           <Text style={styles.itemVolume}>
             &euro;{numberFormat(item.total_volume)}
           </Text>
@@ -150,7 +155,7 @@ const CoinList = () => {
   };
 
   const fetchMore = () => {
-    // setPage(page + 1);
+    setPage(page + 1);
     setLoading(true);
   };
 
@@ -208,9 +213,16 @@ const styles = StyleSheet.create({
     fontSize: 14,
     color: '#03AE9D',
   },
+  coinText: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    height: 'auto',
+  },
   baseText: {
     fontSize: 22,
     fontWeight: '700',
+    marginRight: 10,
+    width: SPACING * 9,
   },
   innerText: {
     fontSize: 18,
