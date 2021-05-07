@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import PropTypes from 'prop-types';
 import { TouchableOpacity, StyleSheet } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 
@@ -8,6 +9,12 @@ const FloatingButton = ({ onPress, icon, color }) => {
       <Icon name={icon} color={color} size={26} />
     </TouchableOpacity>
   );
+};
+
+FloatingButton.propTypes = {
+  color: PropTypes.string,
+  onPress: PropTypes.func,
+  icon: PropTypes.string,
 };
 
 export default FloatingButton;

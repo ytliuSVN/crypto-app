@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { Text, StyleSheet, TouchableOpacity } from 'react-native';
 import { AntDesign } from '@expo/vector-icons';
 
@@ -9,6 +10,13 @@ const Tab = ({ color, tab, onPress, icon }) => {
       <Text style={{ color: color }}>{tab.name}</Text>
     </TouchableOpacity>
   );
+};
+
+Tab.propTypes = {
+  color: PropTypes.string,
+  tab: PropTypes.object,
+  onPress: PropTypes.func,
+  icon: PropTypes.string,
 };
 
 export default Tab;
