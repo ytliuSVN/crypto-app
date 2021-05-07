@@ -10,7 +10,7 @@ import CoinList from './CoinList';
 import ModalPicker from './ModalPicker';
 import FloatingButton from './FloatingButton';
 
-const Home = () => {
+const Home = ({ navigation }) => {
   const [chooseData, setChooseData] = useState('Sort by...');
   const [modalVisible, setModalVisible] = useState(false);
   const changeModalVisibility = (bool) => {
@@ -45,7 +45,7 @@ const Home = () => {
           setData={setData}
         />
       </Modal>
-      <CoinList />
+      <CoinList navigation={navigation} />
     </SafeAreaView>
   );
 };

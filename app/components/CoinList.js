@@ -17,7 +17,8 @@ const SPACING = 20;
 const AVATAR_SIZE = 70;
 const ITEM_SIZE = AVATAR_SIZE + SPACING * 3;
 
-const CoinList = () => {
+const CoinList = ({ navigation }) => {
+  console.log(navigation);
   const [coins, setCoins] = useState([]);
   const [page, setPage] = useState(1);
   const [loading, setLoading] = useState(false);
@@ -112,7 +113,8 @@ const CoinList = () => {
             opacity,
           },
         ]}
-        onPress={() => alert(`test onPress: ${item.id}`)}
+        onPress={() => navigation.navigate('Detail')}
+        // onPress={() => alert(`test onPress: ${item.id}`)}
       >
         <Image style={styles.itemImage} source={{ uri: item.image }} />
         <View style={styles.wrapper}>

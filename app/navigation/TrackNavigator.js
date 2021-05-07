@@ -1,7 +1,7 @@
 import React from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
 import Home from '../components/Home';
-import Details from '../components/Details';
+import CryptoDetail from '../components/CryptoDetail';
 
 const Stack = createStackNavigator();
 
@@ -21,7 +21,7 @@ const TrackNavigator = () => {
   return (
     <Stack.Navigator screenOptions={screenOptions}>
       <Stack.Screen name='All Coins' component={Home} />
-      <Stack.Screen name='Details' component={Details} />
+      <Stack.Screen name='Detail' component={CryptoDetail} />
     </Stack.Navigator>
   );
 };
