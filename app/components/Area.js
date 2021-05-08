@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { View, Text, StyleSheet, Dimensions, SafeAreaView } from 'react-native';
-import { AreaChart, Grid } from 'react-native-svg-charts';
+import { AreaChart, Grid, YAxis } from 'react-native-svg-charts';
 import * as shape from 'd3-shape';
 // import { DATA } from '../../dataset/Data';
 
@@ -19,17 +19,34 @@ const Area = ({ coinId }) => {
     47159.75662737094,
     47772.0856970536,
   ];
+  const contentInset = { top: 30, bottom: 30 };
 
   useEffect(() => {
     setData(DATA);
   }, []);
 
+  const numberFormat = (num) => {
+    return num.toString().replace(/^[+-]?\d+/, (int) => {
+      return int.replace(/(\d)(?=(\d{3})+$)/g, '$1,');
+    });
+  };
+
   return (
-    <SafeAreaView>
+    <SafeAreaView style={styles.wrapper}>
+      <YAxis
+        data={data}
+        contentInset={contentInset}
+        svg={{
+          fill: 'grey',
+          fontSize: 10,
+        }}
+        numberOfTicks={5}
+        formatLabel={(value) => `€${numberFormat(value)}`}
+      />
       <AreaChart
         style={styles.container}
         data={data}
-        contentInset={{ top: 30, bottom: 30 }}
+        contentInset={contentInset}
         curve={shape.curveNatural}
         svg={{ fill: 'rgba(3, 174, 157, 0.8)' }}
       >
@@ -42,8 +59,13 @@ const Area = ({ coinId }) => {
 export default Area;
 
 const styles = StyleSheet.create({
+  wrapper: {
+    height: height / 4,
+    flexDirection: 'row',
+  },
   container: {
     height: height / 4,
-    width: width - 20,
+    width: width - 80,
+    marginLeft: 14,
   },
 });
