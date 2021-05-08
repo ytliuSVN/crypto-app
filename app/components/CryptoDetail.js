@@ -1,12 +1,14 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { View, Text, StyleSheet } from 'react-native';
+import Area from './Area';
 
 const CryptoDetail = ({ route }) => {
   const { itemId } = route.params;
   return (
     <View style={styles.container}>
       <Text style={styles.text}>{itemId}</Text>
+      <Area coinId={itemId} />
     </View>
   );
 };
