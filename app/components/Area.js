@@ -2,32 +2,49 @@ import React, { useState, useEffect } from 'react';
 import { View, Text, StyleSheet, Dimensions, SafeAreaView } from 'react-native';
 import { AreaChart, Grid, YAxis, XAxis } from 'react-native-svg-charts';
 import * as shape from 'd3-shape';
-// import { DATA } from '../../dataset/Data';
+import axios from 'axios';
+import { COINGECKO_URL } from '@env';
 
 const { height, width } = Dimensions.get('window');
+const DATA = [50, 40, 8, 24, 20, 91, 35, 53];
 
 const Area = ({ coinId }) => {
   const [data, setData] = useState([]);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(false);
 
-  const DATA = [
-    48097.49969239491,
-    47047.72809852492,
-    47437.639045229014,
-    44498.3953336929,
-    47831.061167924854,
-    46834.930702231,
-    47159.75662737094,
-    47772.0856970536,
-  ];
+  useEffect(() => {
+    setError(false);
+    setLoading(true);
+    try {
+      setData(DATA);
+      // fetchMarketChart();
+    } catch (error) {
+      console.error(error);
+      setError(true);
+    }
+    setLoading(false);
+  }, []);
+
+  const fetchMarketChart = async () => {
+    const urlParams = `vs_currency=eur&days=7&interval=daily`;
+    const baseUrl = `${COINGECKO_URL}/api/v3/coins/${coinId}/market_chart?${urlParams}`;
+
+    axios
+      .get(baseUrl)
+      .then((res) => {
+        setData(res.data);
+      })
+      .catch(() => {
+        console.error('Axios GET request failed');
+      });
+  };
+
   const contentInset = { top: 30, bottom: 30 };
   const labels = {
     fill: 'grey',
     fontSize: 10,
   };
-
-  useEffect(() => {
-    setData(DATA);
-  }, []);
 
   const formatCash = (n) => {
     if (n < 1e3) return n;
