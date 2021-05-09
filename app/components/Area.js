@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { View, Text, StyleSheet, Dimensions, SafeAreaView } from 'react-native';
-import { AreaChart, Grid, YAxis } from 'react-native-svg-charts';
+import { AreaChart, Grid, YAxis, XAxis } from 'react-native-svg-charts';
 import * as shape from 'd3-shape';
 // import { DATA } from '../../dataset/Data';
 
@@ -25,10 +25,12 @@ const Area = ({ coinId }) => {
     setData(DATA);
   }, []);
 
-  const numberFormat = (num) => {
-    return num.toString().replace(/^[+-]?\d+/, (int) => {
-      return int.replace(/(\d)(?=(\d{3})+$)/g, '$1,');
-    });
+  const formatCash = (n) => {
+    if (n < 1e3) return n;
+    if (n >= 1e3 && n < 1e6) return +(n / 1e3).toFixed(1) + 'K';
+    if (n >= 1e6 && n < 1e9) return +(n / 1e6).toFixed(1) + 'M';
+    if (n >= 1e9 && n < 1e12) return +(n / 1e9).toFixed(1) + 'B';
+    if (n >= 1e12) return +(n / 1e12).toFixed(1) + 'T';
   };
 
   return (
@@ -41,7 +43,7 @@ const Area = ({ coinId }) => {
           fontSize: 10,
         }}
         numberOfTicks={5}
-        formatLabel={(value) => `€${numberFormat(value)}`}
+        formatLabel={(value) => `€${formatCash(value)}`}
       />
       <AreaChart
         style={styles.container}
@@ -66,6 +68,6 @@ const styles = StyleSheet.create({
   container: {
     height: height / 4,
     width: width - 80,
-    marginLeft: 14,
+    marginLeft: 12,
   },
 });
