@@ -37,6 +37,7 @@ const Area = ({ coinId }) => {
     if (n >= 1e12) return +(n / 1e12).toFixed(1) + 'T';
   };
 
+  // Price Chart for %1$s days\n(x-axis: Date, y-axis: Price in €)
   return (
     <SafeAreaView style={styles.wrapper}>
       <YAxis
