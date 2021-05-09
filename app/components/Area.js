@@ -20,6 +20,10 @@ const Area = ({ coinId }) => {
     47772.0856970536,
   ];
   const contentInset = { top: 30, bottom: 30 };
+  const labels = {
+    fill: 'grey',
+    fontSize: 10,
+  };
 
   useEffect(() => {
     setData(DATA);
@@ -38,22 +42,31 @@ const Area = ({ coinId }) => {
       <YAxis
         data={data}
         contentInset={contentInset}
-        svg={{
-          fill: 'grey',
-          fontSize: 10,
-        }}
-        numberOfTicks={5}
+        svg={labels}
+        // numberOfTicks={5}
         formatLabel={(value) => `€${formatCash(value)}`}
       />
-      <AreaChart
-        style={styles.container}
-        data={data}
-        contentInset={contentInset}
-        curve={shape.curveNatural}
-        svg={{ fill: 'rgba(3, 174, 157, 0.8)' }}
-      >
-        <Grid svg={{ stroke: 'rgba(151, 151, 151, 0.09)' }} belowChart={true} />
-      </AreaChart>
+      <View style={styles.main}>
+        <AreaChart
+          style={styles.container}
+          data={data}
+          contentInset={contentInset}
+          curve={shape.curveNatural}
+          svg={{ fill: 'rgba(3, 174, 157, 0.8)' }}
+        >
+          <Grid
+            svg={{ stroke: 'rgba(151, 151, 151, 0.09)' }}
+            belowChart={true}
+          />
+        </AreaChart>
+        <XAxis
+          style={styles.xAxis}
+          data={data}
+          contentInset={{ left: 30, right: 30 }}
+          svg={labels}
+          formatLabel={(value, index) => index}
+        />
+      </View>
     </SafeAreaView>
   );
 };
@@ -62,12 +75,19 @@ export default Area;
 
 const styles = StyleSheet.create({
   wrapper: {
-    height: height / 4,
+    height: height / 2,
     flexDirection: 'row',
   },
+  main: {
+    flexDirection: 'column',
+  },
   container: {
-    height: height / 4,
+    height: height / 2,
     width: width - 80,
     marginLeft: 12,
+  },
+  xAxis: {
+    marginHorizontal: -10,
+    marginTop: 10,
   },
 });
