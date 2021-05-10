@@ -9,7 +9,8 @@ const { height, width } = Dimensions.get('window');
 const DATA = [50, 40, 8, 24, 20, 91, 35, 53];
 
 const Area = ({ coinId }) => {
-  const [data, setData] = useState([]);
+  const [timeStamp, setTimeStamp] = useState([]);
+  const [prices, setPrices] = useState([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(false);
 
@@ -17,8 +18,8 @@ const Area = ({ coinId }) => {
     setError(false);
     setLoading(true);
     try {
-      setData(DATA);
-      // fetchMarketChart();
+      // setData(DATA);
+      fetchMarketChart();
     } catch (error) {
       console.error(error);
       setError(true);
@@ -33,7 +34,9 @@ const Area = ({ coinId }) => {
     axios
       .get(baseUrl)
       .then((res) => {
-        setData(res.data);
+        // setData(res.data);
+        setTimeStamp(res.data.prices.map(x=>x[0]));
+        setPrices(res.data.prices.map(x=>x[1]));
       })
       .catch(() => {
         console.error('Axios GET request failed');
@@ -58,7 +61,7 @@ const Area = ({ coinId }) => {
   return (
     <SafeAreaView style={styles.wrapper}>
       <YAxis
-        data={data}
+        data={prices}
         contentInset={contentInset}
         svg={labels}
         // numberOfTicks={5}
@@ -67,7 +70,7 @@ const Area = ({ coinId }) => {
       <View style={styles.main}>
         <AreaChart
           style={styles.container}
-          data={data}
+          data={prices}
           contentInset={contentInset}
           curve={shape.curveNatural}
           svg={{ fill: 'rgba(3, 174, 157, 0.8)' }}
@@ -79,7 +82,7 @@ const Area = ({ coinId }) => {
         </AreaChart>
         <XAxis
           style={styles.xAxis}
-          data={data}
+          data={timeStamp}
           contentInset={{ left: 30, right: 30 }}
           svg={labels}
           formatLabel={(value, index) => index}
