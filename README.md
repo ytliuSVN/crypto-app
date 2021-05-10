@@ -1,3 +1,11 @@
+<div align="center">
+
+![stability-wip](https://img.shields.io/badge/stability-work_in_progress-lightgrey.svg)
+[![code style: prettier](https://img.shields.io/badge/code_style-prettier-ff69b4.svg?style=flat-square)](https://github.com/prettier/prettier)
+
+
+</div>
+
 # Crypto Tracker App
 
 A Crypto Tracker App inspired by SpiralDev's [**CryptoTracker**](https://github.com/SpiralDevelopment/CryptoTracker), built using React Native, utilizing [CoinGecko API](https://www.coingecko.com/api/documentations/v3) [~~CoinMarketCap API~~](https://coinmarketcap.com/api/documentation/v1/#tag/exchange) to track the price of cryptocurrencies.
