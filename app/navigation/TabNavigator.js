@@ -1,9 +1,9 @@
 import React from 'react';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import Chart from '../components/Chart';
 import TabBar from '../components/TabBar';
 import TrackNavigator from '../navigation/TrackNavigator';
 import ProfileNavigator from '../navigation/ProfileNavigator';
+import SearchNavigator from '../navigation/SearchNavigator';
 
 const Tab = createBottomTabNavigator();
 
@@ -16,9 +16,9 @@ const TabNavigator = () => {
         initialParams={{ icon: 'eye' }}
       />
       <Tab.Screen
-        name='Stats'
-        component={Chart}
-        initialParams={{ icon: 'linechart' }}
+        name='Search'
+        component={SearchNavigator}
+        initialParams={{ icon: 'search1' }}
       />
       <Tab.Screen
         name='Settings'

@@ -1,22 +1,22 @@
 import React from 'react';
 import { View, Text, Button, StyleSheet } from 'react-native';
 
-const Chart = () => {
+const Search = () => {
   return (
     <View style={styles.container}>
-      <Text style={styles.text}>Let's Draw!</Text>
+      {/* <Text style={styles.text}>Search</Text> */}
     </View>
   );
 };
 
-export default Chart;
+export default Search;
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor: '#76a6ef',
+    backgroundColor: '#d6d9dc',
   },
   text: {
     fontSize: 20,
