@@ -12,6 +12,7 @@ import {
   RefreshControl,
 } from 'react-native';
 import { AntDesign } from '@expo/vector-icons';
+import Badge from './Badge';
 
 const AnimatedPressable = Animated.createAnimatedComponent(Pressable);
 const SPACING = 20;
@@ -47,7 +48,7 @@ const CoinList = ({ navigation }) => {
   }, [page]);
 
   const fetchCrypto = async () => {
-    const perPage = 25;
+    const perPage = 64;
     const urlParams = `vs_currency=eur&order=market_cap_desc&per_page=${perPage}&page=${page}&sparkline=false`;
     const baseUrl = `${COINGECKO_URL}/api/v3/coins/markets?${urlParams}`;
 
@@ -107,7 +108,7 @@ const CoinList = ({ navigation }) => {
       } else {
         return (
           <Text style={styles.drop}>
-            <AntDesign name='caretdown' color='#ff252c' size={10} />{' '}
+            <AntDesign name='caretdown' color='#fb2c33' size={10} />{' '}
             {percentageFormat(item.price_change_percentage_24h)}%
           </Text>
         );
@@ -135,7 +136,7 @@ const CoinList = ({ navigation }) => {
             >
               {item.name}
             </Text>
-            <Text style={styles.innerText}>{item.symbol}</Text>
+            <Badge value={item.symbol} />
           </View>
           <Text style={styles.itemVolume}>
             &euro;{numberFormat(item.total_volume)}
@@ -183,7 +184,7 @@ const CoinList = ({ navigation }) => {
       keyExtractor={(item) => item.id}
       ListFooterComponent={renderFooter}
       onEndReachedThreshold={0.5}
-      onEndReached={fetchMore}
+      // onEndReached={fetchMore}
       refreshControl={
         <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
       }
@@ -231,12 +232,12 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     height: 'auto',
+    marginRight: SPACING * 2,
   },
   baseText: {
     fontSize: 22,
     fontWeight: '700',
     marginRight: 10,
-    width: SPACING * 9,
   },
   innerText: {
     fontSize: 18,
@@ -263,7 +264,7 @@ const styles = StyleSheet.create({
     fontSize: 16,
   },
   drop: {
-    color: '#ff252c',
+    color: '#fb2c33',
     fontSize: 16,
   },
 });

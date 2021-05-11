@@ -9,10 +9,15 @@ import {
   SafeAreaView,
   ActivityIndicator,
   Image,
+  Dimensions,
   TextInput,
 } from 'react-native';
 import axios from 'axios';
+import Badge from './Badge';
 
+const { height, width } = Dimensions.get('window');
+
+const SPACING = 20;
 const AVATAR_SIZE = 40;
 
 const Search = () => {
@@ -69,7 +74,8 @@ const Search = () => {
       <View style={styles.listItem}>
         <Image source={{ uri: item.image }} style={styles.coverImage} />
         <View style={styles.metaInfo}>
-          <Text style={styles.title}>{`${item.name} ${item.symbol}`}</Text>
+          <Text style={styles.title}>{item.name}</Text>
+          <Badge value={item.symbol} />
         </View>
       </View>
     );
@@ -102,9 +108,10 @@ const styles = StyleSheet.create({
     fontWeight: '700',
   },
   listItem: {
+    width: width,
     marginTop: 10,
-    paddingVertical: 20,
-    paddingHorizontal: 20,
+    paddingVertical: SPACING,
+    paddingHorizontal: SPACING,
     backgroundColor: '#fff',
     flexDirection: 'row',
   },
@@ -114,11 +121,11 @@ const styles = StyleSheet.create({
     borderRadius: AVATAR_SIZE,
   },
   metaInfo: {
+    flexDirection: 'row',
     marginLeft: 10,
   },
   title: {
     fontSize: 18,
-    width: 200,
     padding: 10,
   },
   loader: {
