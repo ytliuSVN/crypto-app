@@ -1,5 +1,12 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, StyleSheet, Dimensions, SafeAreaView } from 'react-native';
+import {
+  View,
+  Text,
+  StyleSheet,
+  Dimensions,
+  SafeAreaView,
+  ActivityIndicator,
+} from 'react-native';
 import { AreaChart, Grid, YAxis, XAxis } from 'react-native-svg-charts';
 import * as shape from 'd3-shape';
 import axios from 'axios';
@@ -54,38 +61,49 @@ const Area = ({ coinId }) => {
     if (n >= 1e12) return +(n / 1e12).toFixed(1) + 'T';
   };
 
-  // Price Chart for %1$s days\n(x-axis: Date, y-axis: Price in €)
-  return (
-    <SafeAreaView style={styles.wrapper}>
-      <YAxis
-        data={data}
-        contentInset={contentInset}
-        svg={labels}
-        // numberOfTicks={5}
-        formatLabel={(value) => `€${formatCash(value)}`}
-      />
-      <View style={styles.main}>
-        <AreaChart
-          style={styles.container}
+  /**
+   * Price Chart for %1$s days\n(x-axis: Date, y-axis: Price in €)
+   * @returns
+   */
+  const renderChart = () => {
+    return (
+      <SafeAreaView style={styles.wrapper}>
+        <YAxis
           data={data}
           contentInset={contentInset}
-          curve={shape.curveNatural}
-          svg={{ fill: 'rgba(3, 174, 157, 0.8)' }}
-        >
-          <Grid
-            svg={{ stroke: 'rgba(151, 151, 151, 0.09)' }}
-            belowChart={true}
-          />
-        </AreaChart>
-        <XAxis
-          style={styles.xAxis}
-          data={data}
-          contentInset={{ left: 30, right: 30 }}
           svg={labels}
-          formatLabel={(value, index) => index}
+          // numberOfTicks={5}
+          formatLabel={(value) => `€${formatCash(value)}`}
         />
-      </View>
-    </SafeAreaView>
+        <View style={styles.main}>
+          <AreaChart
+            style={styles.container}
+            data={data}
+            contentInset={contentInset}
+            curve={shape.curveNatural}
+            svg={{ fill: 'rgba(3, 174, 157, 0.4)' }}
+          >
+            <Grid
+              svg={{ stroke: 'rgba(151, 151, 151, 0.09)' }}
+              belowChart={true}
+            />
+          </AreaChart>
+          <XAxis
+            style={styles.xAxis}
+            data={data}
+            contentInset={{ left: 30, right: 30 }}
+            svg={labels}
+            formatLabel={(value, index) => index}
+          />
+        </View>
+      </SafeAreaView>
+    );
+  };
+
+  return loading ? (
+    <ActivityIndicator style={styles.loader} size='large' color='#03AE9D' />
+  ) : (
+    renderChart()
   );
 };
 
@@ -107,5 +125,10 @@ const styles = StyleSheet.create({
   xAxis: {
     marginHorizontal: -10,
     marginTop: 10,
+  },
+  loader: {
+    justifyContent: 'space-around',
+    height: height / 2,
+    width: width - 80,
   },
 });
