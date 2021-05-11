@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import PropTypes from 'prop-types';
 import {
   View,
   Text,
@@ -15,7 +16,7 @@ import { COINGECKO_URL } from '@env';
 const { height, width } = Dimensions.get('window');
 const DATA = [50, 40, 8, 24, 20, 91, 35, 53];
 
-const Area = ({ coinId }) => {
+const Area = ({ coinId, days }) => {
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(false);
@@ -34,7 +35,7 @@ const Area = ({ coinId }) => {
   }, []);
 
   const fetchMarketChart = async () => {
-    const urlParams = `vs_currency=eur&days=7&interval=daily`;
+    const urlParams = `vs_currency=eur&days=${days}&interval=daily`;
     const baseUrl = `${COINGECKO_URL}/api/v3/coins/${coinId}/market_chart?${urlParams}`;
 
     axios
@@ -105,6 +106,11 @@ const Area = ({ coinId }) => {
   ) : (
     renderChart()
   );
+};
+
+Area.propTypes = {
+  coinId: PropTypes.string,
+  days: PropTypes.number,
 };
 
 export default Area;
