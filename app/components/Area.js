@@ -14,7 +14,6 @@ import axios from 'axios';
 import { COINGECKO_URL } from '@env';
 
 const { height, width } = Dimensions.get('window');
-const DATA = [50, 40, 8, 24, 20, 91, 35, 53];
 
 const Area = ({ coinId, days }) => {
   const [data, setData] = useState([]);
@@ -25,8 +24,7 @@ const Area = ({ coinId, days }) => {
     setError(false);
     setLoading(true);
     try {
-      setData(DATA);
-      // fetchMarketChart();
+      fetchMarketChart();
     } catch (error) {
       console.error(error);
       setError(true);
@@ -41,7 +39,7 @@ const Area = ({ coinId, days }) => {
     axios
       .get(baseUrl)
       .then((res) => {
-        setData(res.data);
+        setData(res.data.prices.map((x) => x[1]));
       })
       .catch(() => {
         console.error('Axios GET request failed');
@@ -73,7 +71,7 @@ const Area = ({ coinId, days }) => {
           data={data}
           contentInset={contentInset}
           svg={labels}
-          // numberOfTicks={5}
+          numberOfTicks={5}
           formatLabel={(value) => `€${formatCash(value)}`}
         />
         <View style={styles.main}>

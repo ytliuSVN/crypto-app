@@ -48,7 +48,7 @@ const CoinList = ({ navigation }) => {
   }, [page]);
 
   const fetchCrypto = async () => {
-    const perPage = 64;
+    const perPage = 25;
     const urlParams = `vs_currency=eur&order=market_cap_desc&per_page=${perPage}&page=${page}&sparkline=false`;
     const baseUrl = `${COINGECKO_URL}/api/v3/coins/markets?${urlParams}`;
 
@@ -184,7 +184,7 @@ const CoinList = ({ navigation }) => {
       keyExtractor={(item) => item.id}
       ListFooterComponent={renderFooter}
       onEndReachedThreshold={0.5}
-      // onEndReached={fetchMore}
+      onEndReached={fetchMore}
       refreshControl={
         <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
       }
