@@ -10,41 +10,16 @@ import {
 } from 'react-native';
 import { AreaChart, Grid, YAxis, XAxis } from 'react-native-svg-charts';
 import * as shape from 'd3-shape';
-import axios from 'axios';
 import { COINGECKO_URL } from '@env';
+import useRequest from './Hooks/UseFetch';
 
 const { height, width } = Dimensions.get('window');
 
 const Area = ({ coinId, days }) => {
-  const [data, setData] = useState([]);
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState(false);
+  const urlParams = `vs_currency=eur&days=${days}&interval=daily`;
+  const baseUrl = `${COINGECKO_URL}/api/v3/coins/${coinId}/market_chart?${urlParams}`;
 
-  useEffect(() => {
-    setError(false);
-    setLoading(true);
-    try {
-      fetchMarketChart();
-    } catch (error) {
-      console.error(error);
-      setError(true);
-    }
-    setLoading(false);
-  }, []);
-
-  const fetchMarketChart = async () => {
-    const urlParams = `vs_currency=eur&days=${days}&interval=daily`;
-    const baseUrl = `${COINGECKO_URL}/api/v3/coins/${coinId}/market_chart?${urlParams}`;
-
-    axios
-      .get(baseUrl)
-      .then((res) => {
-        setData(res.data.prices.map((x) => x[1]));
-      })
-      .catch(() => {
-        console.error('Axios GET request failed');
-      });
-  };
+  const { data, loading, error } = useRequest(baseUrl);
 
   const contentInset = { top: 30, bottom: 30 };
   const labels = {
@@ -60,10 +35,6 @@ const Area = ({ coinId, days }) => {
     if (n >= 1e12) return +(n / 1e12).toFixed(1) + 'T';
   };
 
-  /**
-   * Price Chart for %1$s days\n(x-axis: Date, y-axis: Price in €)
-   * @returns
-   */
   const renderChart = () => {
     return (
       <SafeAreaView style={styles.wrapper}>
