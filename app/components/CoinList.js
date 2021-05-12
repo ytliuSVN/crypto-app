@@ -98,21 +98,16 @@ const CoinList = ({ navigation }) => {
     };
 
     const renderPriceChange = (price) => {
-      if (price > 0) {
-        return (
-          <Text style={styles.rise}>
-            <AntDesign name='caretup' color='#03AE9D' size={10} />{' '}
-            {percentageFormat(item.price_change_percentage_24h)}%
-          </Text>
-        );
-      } else {
-        return (
-          <Text style={styles.drop}>
-            <AntDesign name='caretdown' color='#fb2c33' size={10} />{' '}
-            {percentageFormat(item.price_change_percentage_24h)}%
-          </Text>
-        );
-      }
+      return (
+        <Text style={price > 0 ? styles.rise : styles.drop}>
+          <AntDesign
+            name={price > 0 ? 'caretup' : 'caretdown'}
+            color={price > 0 ? '#03AE9D' : '#fb2c33'}
+            size={10}
+          />{' '}
+          {percentageFormat(item.price_change_percentage_24h)}%
+        </Text>
+      );
     };
 
     return (
