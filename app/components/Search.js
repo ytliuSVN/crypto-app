@@ -3,7 +3,6 @@ import { COINGECKO_URL } from '@env';
 import {
   View,
   Text,
-  Button,
   StyleSheet,
   FlatList,
   SafeAreaView,
@@ -81,9 +80,26 @@ const Search = () => {
     );
   };
 
+  const renderHeader = () => {
+    return (
+      <View style={styles.searchBox}>
+        <TextInput
+          autoCapitalize='none'
+          autoCorrect={false}
+          clearButtonMode='always'
+          // value={query}
+          // onChangeText={(queryText) => handleSearch(queryText)}
+          placeholder='Search'
+          style={styles.searchInput}
+        />
+      </View>
+    );
+  };
+
   return (
     <SafeAreaView style={styles.container}>
       <FlatList
+        ListHeaderComponent={renderHeader}
         data={data}
         renderItem={renderItem}
         keyExtractor={(item) => item.id}
@@ -127,10 +143,21 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 18,
     padding: 10,
+    fontWeight: '700',
   },
   loader: {
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
+  },
+  searchBox: {
+    backgroundColor: '#fff',
+    padding: 10,
+    marginVertical: 10,
+    borderRadius: 20,
+  },
+  searchInput: {
+    backgroundColor: '#fff',
+    paddingHorizontal: 20,
   },
 });
