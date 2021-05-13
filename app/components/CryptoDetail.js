@@ -7,8 +7,8 @@ const CryptoDetail = ({ route }) => {
   const { itemId } = route.params;
   return (
     <View style={styles.container}>
-      <Text style={styles.text}>Price Chart for 7 days</Text>
-      <Area coinId={itemId} days={7} />
+      <Text style={styles.text}>Price Chart for 30 days</Text>
+      <Area coinId={itemId} days={30} />
     </View>
   );
 };
