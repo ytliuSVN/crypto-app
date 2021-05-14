@@ -9,12 +9,9 @@ import {
   SafeAreaView,
   ActivityIndicator,
   Image,
-  Dimensions,
 } from 'react-native';
 import axios from 'axios';
 import Badge from './Badge';
-
-const { height, width } = Dimensions.get('window');
 
 const SPACING = 20;
 const AVATAR_SIZE = 48;
@@ -99,14 +96,16 @@ const Search = () => {
 
   const renderSearchBox = () => {
     return (
-      <SearchBar
-        placeholder='Search'
-        value={query}
-        onChangeText={(queryText) => handleSearch(queryText)}
-        lightTheme={true}
-        showCancel={true}
-        round={true}
-      />
+      <View style={styles.searchBox}>
+        <SearchBar
+          placeholder='Search'
+          value={query}
+          onChangeText={(queryText) => handleSearch(queryText)}
+          lightTheme={true}
+          showCancel={true}
+          round={true}
+        />
+      </View>
     );
   };
 
@@ -126,8 +125,10 @@ export default Search;
 
 const styles = StyleSheet.create({
   container: {
-    // padding: SPACING,
-    // marginBottom: SPACING,
+    paddingBottom: SPACING * 8,
+  },
+  searchBox: {
+    marginBottom: SPACING / 2,
   },
   text: {
     fontSize: 20,
@@ -138,7 +139,6 @@ const styles = StyleSheet.create({
   listItem: {
     marginRight: SPACING / 2,
     marginLeft: SPACING / 2,
-    padding: SPACING,
     marginBottom: SPACING / 2,
     paddingVertical: SPACING,
     paddingHorizontal: SPACING,
