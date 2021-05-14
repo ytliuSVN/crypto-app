@@ -1,14 +1,17 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { View, Text, StyleSheet } from 'react-native';
+import { ButtonGroup } from 'react-native-elements';
 import Area from './Area';
 
 const CryptoDetail = ({ route }) => {
+  const buttons = ['1 Day', '1 Week', '1 Month'];
   const { itemId } = route.params;
   return (
     <View style={styles.container}>
-      <Text style={styles.text}>Price Chart for 30 days</Text>
+      <Text style={styles.text}>Price Chart for 30 days (&euro;)</Text>
       <Area coinId={itemId} days={30} />
+      <ButtonGroup buttons={buttons} containerStyle={{ height: 50 }} />
     </View>
   );
 };

@@ -38,9 +38,9 @@ const Area = ({ coinId, days }) => {
 
   const Gradient = ({ index }) => (
     <Defs key={index}>
-      <LinearGradient id={'gradient'} x1={'0%'} y1={'0%'} x2={'0%'} y2={'100%'}>
-        <Stop offset={'0%'} stopColor={'rgb(35, 196, 188)'} stopOpacity={0.2} />
-        <Stop offset={'100%'} stopColor={'rgb(122, 255, 197)'} stopOpacity={0.5} />
+      <LinearGradient id={'gradient'} x1={'0%'} y1={'0%'} x2={'0%'} y2={'80%'}>
+        <Stop offset={'0%'} stopColor={'rgb(35, 196, 188)'} stopOpacity={0.3} />
+        <Stop offset={'100%'} stopColor={'rgb(179, 255, 251)'} stopOpacity={0.1} />
       </LinearGradient>
     </Defs>
   );
