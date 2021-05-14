@@ -23,6 +23,8 @@ const Search = () => {
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
+  const [query, setQuery] = useState('');
+  const [arrayHolder, setArrayHolder] = useState([]);
 
   useEffect(() => {
     setError(false);
@@ -37,13 +39,14 @@ const Search = () => {
   }, []);
 
   const fetchCrypto = async () => {
-    const urlParams = `vs_currency=eur&order=market_cap_desc&per_page=10&page=1&sparkline=false`;
+    const urlParams = `vs_currency=eur&order=market_cap_desc&per_page=100&page=1&sparkline=false`;
     const API_ENDPOINT = `${COINGECKO_URL}/api/v3/coins/markets?${urlParams}`;
 
     axios
       .get(API_ENDPOINT)
       .then((res) => {
         setData(res.data);
+        setArrayHolder(res.data);
       })
       .catch((error) => {
         console.error('Axios GET request failed');
@@ -80,17 +83,32 @@ const Search = () => {
     );
   };
 
-  const renderHeader = () => {
+  const handleSearch = (text) => {
+    const newData = arrayHolder.filter((item) => {
+      const itemSymbol = item.symbol.toUpperCase();
+      const itemName = item.name.toUpperCase();
+      const formattedQuery = text.toUpperCase();
+      return (
+        itemSymbol.includes(formattedQuery) || itemName.includes(formattedQuery)
+      );
+    });
+
+    setData(newData);
+    setQuery(text);
+  };
+
+  const renderSearchBox = () => {
     return (
       <View style={styles.searchBox}>
         <TextInput
           autoCapitalize='none'
           autoCorrect={false}
           clearButtonMode='always'
-          // value={query}
-          // onChangeText={(queryText) => handleSearch(queryText)}
+          value={query}
+          onChangeText={(queryText) => handleSearch(queryText)}
           placeholder='Search'
           style={styles.searchInput}
+          underlineColorAndroid='transparent'
         />
       </View>
     );
@@ -98,8 +116,8 @@ const Search = () => {
 
   return (
     <SafeAreaView style={styles.container}>
+      {renderSearchBox()}
       <FlatList
-        ListHeaderComponent={renderHeader}
         data={data}
         renderItem={renderItem}
         keyExtractor={(item) => item.id}
