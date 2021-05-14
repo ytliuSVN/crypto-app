@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { COINGECKO_URL } from '@env';
+import { SearchBar } from 'react-native-elements';
 import {
   View,
   Text,
@@ -9,7 +10,6 @@ import {
   ActivityIndicator,
   Image,
   Dimensions,
-  TextInput,
 } from 'react-native';
 import axios from 'axios';
 import Badge from './Badge';
@@ -17,7 +17,7 @@ import Badge from './Badge';
 const { height, width } = Dimensions.get('window');
 
 const SPACING = 20;
-const AVATAR_SIZE = 40;
+const AVATAR_SIZE = 48;
 
 const Search = () => {
   const [data, setData] = useState([]);
@@ -99,18 +99,14 @@ const Search = () => {
 
   const renderSearchBox = () => {
     return (
-      <View style={styles.searchBox}>
-        <TextInput
-          autoCapitalize='none'
-          autoCorrect={false}
-          clearButtonMode='always'
-          value={query}
-          onChangeText={(queryText) => handleSearch(queryText)}
-          placeholder='Search'
-          style={styles.searchInput}
-          underlineColorAndroid='transparent'
-        />
-      </View>
+      <SearchBar
+        placeholder='Search'
+        value={query}
+        onChangeText={(queryText) => handleSearch(queryText)}
+        lightTheme={true}
+        showCancel={true}
+        round={true}
+      />
     );
   };
 
@@ -130,10 +126,8 @@ export default Search;
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
-    backgroundColor: '#d6d9dc',
+    // padding: SPACING,
+    // marginBottom: SPACING,
   },
   text: {
     fontSize: 20,
@@ -142,12 +136,20 @@ const styles = StyleSheet.create({
     fontWeight: '700',
   },
   listItem: {
-    width: width,
-    marginTop: 10,
+    marginRight: SPACING / 2,
+    marginLeft: SPACING / 2,
+    padding: SPACING,
+    marginBottom: SPACING / 2,
     paddingVertical: SPACING,
     paddingHorizontal: SPACING,
     backgroundColor: '#fff',
     flexDirection: 'row',
+    borderRadius: 100,
+    shadowColor: '#000',
+    shadowOpacity: 0.3,
+    shadowOffset: { width: 0, height: 10 },
+    shadowRadius: 20,
+    elevation: 3,
   },
   coverImage: {
     width: AVATAR_SIZE,
@@ -167,15 +169,5 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-  },
-  searchBox: {
-    backgroundColor: '#fff',
-    padding: 10,
-    marginVertical: 10,
-    borderRadius: 20,
-  },
-  searchInput: {
-    backgroundColor: '#fff',
-    paddingHorizontal: 20,
   },
 });
