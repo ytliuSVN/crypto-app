@@ -16,8 +16,21 @@ import useRequest from './Hooks/UseFetch';
 
 const { height, width } = Dimensions.get('window');
 
-const Area = ({ coinId, days }) => {
-  const urlParams = `vs_currency=eur&days=${days}&interval=daily`;
+const Area = ({ coinId, selectedIndex }) => {
+  const handleUrlParams = (selectedIndex) => {
+    switch (selectedIndex) {
+      case 0:
+        return `vs_currency=eur&days=1&interval=hourly`;
+      case 1:
+        return `vs_currency=eur&days=7&interval=daily`;
+      case 2:
+        return `vs_currency=eur&days=30&interval=daily`;
+      default:
+        return `vs_currency=eur&days=30&interval=daily`;
+    }
+  };
+
+  const urlParams = handleUrlParams(selectedIndex);
   const baseUrl = `${COINGECKO_URL}/api/v3/coins/${coinId}/market_chart?${urlParams}`;
 
   const { data, loading, error } = useRequest(baseUrl);
@@ -100,6 +113,7 @@ const Area = ({ coinId, days }) => {
 Area.propTypes = {
   coinId: PropTypes.string,
   days: PropTypes.number,
+  selectedIndex: PropTypes.oneOf([0, 1, 2]),
 };
 
 export default Area;

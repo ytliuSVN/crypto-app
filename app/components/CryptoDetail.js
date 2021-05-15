@@ -5,13 +5,37 @@ import { ButtonGroup } from 'react-native-elements';
 import Area from './Area';
 
 const CryptoDetail = ({ route }) => {
+  const [selected, setSelected] = useState(2);
   const buttons = ['1 Day', '1 Week', '1 Month'];
   const { itemId } = route.params;
+
+  const period = (selectedIndex) => {
+    switch (selectedIndex) {
+      case 0:
+        return `1 day`;
+      case 1:
+        return `7 days`;
+      case 2:
+        return `30 days`;
+      default:
+        return `30 days`;
+    }
+  };
+
   return (
     <View style={styles.container}>
-      <Text style={styles.text}>Price Chart for 30 days (&euro;)</Text>
-      <Area coinId={itemId} days={30} />
-      <ButtonGroup buttons={buttons} containerStyle={{ height: 50 }} />
+      <Text style={styles.text}>
+        {`Price Chart for ${period(selected)}`} (&euro;)
+      </Text>
+      <Area coinId={itemId} selectedIndex={selected} />
+      <ButtonGroup
+        buttons={buttons}
+        onPress={setSelected}
+        selectedIndex={selected}
+        selectedButtonStyle={{ backgroundColor: '#04c2af' }}
+        containerStyle={{ height: 50 }}
+        innerBorderStyle={{ width: 1, color: '#e0e0e0' }}
+      />
     </View>
   );
 };
