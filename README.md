@@ -1,3 +1,7 @@
+<p align="center">
+  <img src="./assets/minecoin.png" alt="Minecoin" width="100" />
+</p>
+
 <div align="center">
 
 ![stability-wip](https://img.shields.io/badge/stability-work_in_progress-lightgrey.svg)
