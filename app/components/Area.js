@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import {
   View,
@@ -116,7 +116,7 @@ Area.propTypes = {
   selectedIndex: PropTypes.oneOf([0, 1, 2]),
 };
 
-export default Area;
+export default React.memo(Area);
 
 const styles = StyleSheet.create({
   wrapper: {

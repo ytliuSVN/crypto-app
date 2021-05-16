@@ -19,7 +19,7 @@ Tab.propTypes = {
   icon: PropTypes.string,
 };
 
-export default Tab;
+export default React.memo(Tab);
 
 const styles = StyleSheet.create({
   container: {

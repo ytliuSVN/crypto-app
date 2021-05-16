@@ -187,7 +187,7 @@ const CoinList = ({ navigation }) => {
   );
 };
 
-export default CoinList;
+export default React.memo(CoinList);
 
 const styles = StyleSheet.create({
   cardList: {

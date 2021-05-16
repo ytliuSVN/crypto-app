@@ -11,7 +11,7 @@ const Badge = ({ value }) => {
   );
 };
 
-export default Badge;
+export default React.memo(Badge);
 
 const styles = StyleSheet.create({
   container: {
