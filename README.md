@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="./assets/minecoin.png" alt="Minecoin" width="100" />
+  <img src="./assets/minecoin.png" alt="Minecoin" width="90" />
 </p>
 
 <div align="center">
@@ -19,7 +19,7 @@ A Crypto Tracker App inspired by SpiralDev's [**CryptoTracker**](https://github.
 
 - [ ] The user can request the list of cryptocurrencies from the CoinGecko API and see the results collated together.
 - [ ] Progressively load more list items by scrolling down the list.
-- [ ] The user can sort the cryptocurrencies based on their `name`, `price`, and `volume`.
+- [ ] The user can sort the cryptocurrencies based on their `Market Cap` and `Volume`.
 
 ## App Details
 

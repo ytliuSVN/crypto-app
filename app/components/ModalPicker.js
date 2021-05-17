@@ -7,14 +7,15 @@ import {
   ScrollView,
   Text,
 } from 'react-native';
+import { FontAwesome } from '@expo/vector-icons';
 
-const OPTIONS = ['name', 'price', 'volume'];
+const OPTIONS = ['market cap', 'volume'];
 const WIDTH = Dimensions.get('window').width;
 
 const ModalPicker = (props) => {
   const [isSelected, setSelected] = useState(false);
   const color = useMemo(() => {
-    return isSelected ? '#03AE9D' : '#676767a1';
+    return isSelected ? '#03AE9D' : '#676767cf';
   }, [isSelected]);
   const onPressCallback = useCallback(() => {
     setSelected((prev) => !prev);
@@ -34,7 +35,11 @@ const ModalPicker = (props) => {
         key={index}
         onPress={() => onPressItem(item)}
       >
-        <Text style={[styles.text, { color }]}>{item}</Text>
+        <View style={styles.sort}>
+          <Text style={[styles.text, { color }]}>{item}</Text>
+          {/* <FontAwesome name='sort-desc' size={24} color='#676767cf' /> */}
+          {/* <FontAwesome name='sort-asc' size={24} color='#676767cf' /> */}
+        </View>
       </TouchableOpacity>
     );
   });
@@ -80,6 +85,10 @@ const styles = StyleSheet.create({
     margin: 20,
     fontSize: 20,
     fontWeight: 'bold',
-    textTransform: 'uppercase',
+    textTransform: 'capitalize',
+  },
+  sort: {
+    flexDirection: 'row',
+    alignItems: 'center',
   },
 });
