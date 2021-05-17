@@ -23,7 +23,7 @@ const wait = (timeout) => {
   return new Promise((resolve) => setTimeout(resolve, timeout));
 };
 
-const CoinList = ({ navigation }) => {
+const CoinList = ({ navigation, order }) => {
   const [coins, setCoins] = useState([]);
   const [page, setPage] = useState(1);
   const [loading, setLoading] = useState(false);
@@ -49,7 +49,8 @@ const CoinList = ({ navigation }) => {
 
   const fetchCrypto = async () => {
     const perPage = 25;
-    const urlParams = `vs_currency=eur&order=market_cap_desc&per_page=${perPage}&page=${page}&sparkline=false`;
+    const order = 'market_cap_desc';
+    const urlParams = `vs_currency=eur&order=${order}&per_page=${perPage}&page=${page}&sparkline=false`;
     const baseUrl = `${COINGECKO_URL}/api/v3/coins/markets?${urlParams}`;
 
     axios
@@ -134,11 +135,11 @@ const CoinList = ({ navigation }) => {
             <Badge value={item.symbol} />
           </View>
           <Text style={styles.itemVolume}>
-            &euro;{numberFormat(item.total_volume)}
+            &euro;{numberFormat(item.total_volume || 0)}
           </Text>
           <View style={styles.combo}>
             <Text style={styles.itemPrice}>
-              &euro;{numberFormat(item.current_price)}
+              &euro;{numberFormat(item.current_price || 0)}
             </Text>
             {renderPriceChange(item.price_change_percentage_24h)}
           </View>

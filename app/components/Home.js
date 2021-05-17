@@ -11,7 +11,7 @@ import ModalPicker from './ModalPicker';
 import FloatingButton from './FloatingButton';
 
 const Home = ({ navigation }) => {
-  const [sortTarget, setSortTarget] = useState(null);
+  const [sortTarget, setSortTarget] = useState('market_cap_desc');
   const [modalVisible, setModalVisible] = useState(false);
   const changeModalVisibility = (bool) => {
     setModalVisible(bool);
@@ -45,7 +45,7 @@ const Home = ({ navigation }) => {
           setData={setData}
         />
       </Modal>
-      <CoinList navigation={navigation} />
+      <CoinList navigation={navigation} order={sortTarget}/>
     </SafeAreaView>
   );
 };
