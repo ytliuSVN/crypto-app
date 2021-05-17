@@ -22,6 +22,7 @@ const Search = () => {
   const [error, setError] = useState(null);
   const [query, setQuery] = useState('');
   const [arrayHolder, setArrayHolder] = useState([]);
+  const [showEmpty, setShowEmpty] = useState(false);
 
   useEffect(() => {
     setError(false);
@@ -50,24 +51,6 @@ const Search = () => {
       });
   };
 
-  if (loading) {
-    return (
-      <View style={styles.loader}>
-        <ActivityIndicator size='large' color='#03AE9D' />
-      </View>
-    );
-  }
-
-  if (error) {
-    return (
-      <View style={styles.loader}>
-        <Text style={{ fontSize: 18 }}>
-          Error fetching data... Check your network connection!
-        </Text>
-      </View>
-    );
-  }
-
   const renderItem = ({ item }) => {
     return (
       <View style={styles.listItem}>
@@ -92,6 +75,7 @@ const Search = () => {
 
     setData(newData);
     setQuery(text);
+    !newData?.length ? setShowEmpty(true) : setShowEmpty(false);
   };
 
   const renderSearchBox = () => {
@@ -109,14 +93,26 @@ const Search = () => {
     );
   };
 
+  const renderSearchEmpty = () => {
+    return (
+      <View style={styles.empty}>
+        <Text style={{ fontSize: 18 }}>Wow, such empty.</Text>
+      </View>
+    );
+  };
+
   return (
     <SafeAreaView style={styles.container}>
       {renderSearchBox()}
-      <FlatList
-        data={data}
-        renderItem={renderItem}
-        keyExtractor={(item) => item.id}
-      />
+      {showEmpty ? (
+        renderSearchEmpty()
+      ) : (
+        <FlatList
+          data={data}
+          renderItem={renderItem}
+          keyExtractor={(item) => item.id}
+        />
+      )}
     </SafeAreaView>
   );
 };
@@ -166,6 +162,11 @@ const styles = StyleSheet.create({
     fontWeight: '700',
   },
   loader: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  empty: {
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
