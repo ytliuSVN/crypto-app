@@ -25,9 +25,9 @@ A Crypto Tracker App inspired by SpiralDev's [**CryptoTracker**](https://github.
 
 ### Screenshots
 
-| Prices by Market Cap  | Detail Screen |
-| :-: | :-: |
-| ![Prices Screen](./assets/screenshot/prices.png) | ![Detail Screen](./assets/screenshot/detail.png) |
+| Prices by Market Cap  | Detail Screen | Sorted By |
+| :-: | :-: | :-: |
+| ![Prices Screen](./assets/screenshot/prices.png) | ![Detail Screen](./assets/screenshot/detail.png) | ![Sorted By](./assets/screenshot/sorted.png) |
 
 ### Loading Environment Variables
 
