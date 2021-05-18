@@ -96,13 +96,19 @@ const Search = () => {
   const renderSearchEmpty = () => {
     return (
       <View style={styles.empty}>
-        <Text style={{ fontSize: 18 }}>Wow, such empty.</Text>
+        <Text style={styles.emptyText}>Wow, such empty.</Text>
       </View>
     );
   };
 
   return (
     <SafeAreaView style={styles.container}>
+      <Image
+        style={styles.itemBGImage}
+        source={require('../../assets/wallpaper.jpeg')}
+        blurRadius={10}
+        resizeMode='cover'
+      />
       {renderSearchBox()}
       {showEmpty ? (
         renderSearchEmpty()
@@ -121,7 +127,11 @@ export default Search;
 
 const styles = StyleSheet.create({
   container: {
+    flexGrow: 1,
     paddingBottom: SPACING * 8,
+  },
+  itemBGImage: {
+    ...StyleSheet.absoluteFillObject,
   },
   searchBox: {
     marginBottom: SPACING / 2,
@@ -167,8 +177,13 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   empty: {
-    flex: 1,
+    flexGrow: 1,
     justifyContent: 'center',
     alignItems: 'center',
+  },
+  emptyText: {
+    fontSize: 18,
+    color: '#939699',
+    fontWeight: '400',
   },
 });
