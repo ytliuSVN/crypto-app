@@ -49,7 +49,6 @@ const CoinList = ({ navigation, order }) => {
 
   const fetchCrypto = async () => {
     const perPage = 25;
-    const order = 'market_cap_desc';
     const urlParams = `vs_currency=eur&order=${order}&per_page=${perPage}&page=${page}&sparkline=false`;
     const baseUrl = `${COINGECKO_URL}/api/v3/coins/markets?${urlParams}`;
 

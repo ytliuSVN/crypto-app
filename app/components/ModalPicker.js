@@ -1,4 +1,4 @@
-import React, { useState, useCallback } from 'react';
+import React, { useState } from 'react';
 import {
   View,
   StyleSheet,
@@ -15,16 +15,26 @@ const WIDTH = Dimensions.get('window').width;
 const ModalPicker = (props) => {
   const [isSelected, setSelected] = useState(false);
   const [activeIndex, setActiveIndex] = useState();
-
-  const onPressCallback = useCallback(() => {
-    setSelected((prev) => !prev);
-  }, [setSelected]);
+  const [toggleState, setToggleState] = useState('sort-numeric-desc');
 
   const onPressItem = (option, index) => {
     setActiveIndex(index);
     setSelected(true);
-    props.setData(option);
+    toggle(option);
     // props.changeModalVisibility(false);
+  };
+
+  const toggle = (option) => {
+    setToggleState(
+      toggleState === 'sort-numeric-desc'
+        ? 'sort-numeric-asc'
+        : 'sort-numeric-desc'
+    );
+
+    const key = option.replace(/\s+/g, '_').toLowerCase();
+    const order = toggleState.replace('sort-numeric-', '');
+    // valid values: market_cap_desc, market_cap_asc, volume_desc, volume_asc
+    props.setData(`${key}_${order}`);
   };
 
   const option = OPTIONS.map((item, index) => {
@@ -50,11 +60,8 @@ const ModalPicker = (props) => {
           </Text>
 
           {activeIndex === index && isSelected ? (
-            <FontAwesome name='sort-desc' size={24} color='#03AE9D' />
+            <FontAwesome name={toggleState} size={24} color='#03AE9D' />
           ) : null}
-
-          {/* <FontAwesome name='sort-desc' size={24} color='#03AE9D' /> */}
-          {/* <FontAwesome name='sort-asc' size={24} color='#03AE9D' /> */}
         </View>
       </TouchableOpacity>
     );
