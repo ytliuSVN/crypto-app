@@ -1,4 +1,4 @@
-import React, { useState, useMemo, useCallback } from 'react';
+import React, { useState, useCallback } from 'react';
 import {
   View,
   StyleSheet,
@@ -14,16 +14,17 @@ const WIDTH = Dimensions.get('window').width;
 
 const ModalPicker = (props) => {
   const [isSelected, setSelected] = useState(false);
-  const color = useMemo(() => {
-    return isSelected ? '#03AE9D' : '#676767cf';
-  }, [isSelected]);
+  const [activeIndex, setActiveIndex] = useState();
+
   const onPressCallback = useCallback(() => {
     setSelected((prev) => !prev);
   }, [setSelected]);
 
-  const onPressItem = (option) => {
-    props.changeModalVisibility(false);
+  const onPressItem = (option, index) => {
+    setActiveIndex(index);
+    setSelected(true);
     props.setData(option);
+    // props.changeModalVisibility(false);
   };
 
   const option = OPTIONS.map((item, index) => {
@@ -33,12 +34,27 @@ const ModalPicker = (props) => {
           index === OPTIONS.length - 1 ? styles.noBorderOption : styles.option
         }
         key={index}
-        onPress={() => onPressItem(item)}
+        onPress={() => onPressItem(item, index)}
       >
         <View style={styles.sort}>
-          <Text style={[styles.text, { color }]}>{item}</Text>
-          {/* <FontAwesome name='sort-desc' size={24} color='#676767cf' /> */}
-          {/* <FontAwesome name='sort-asc' size={24} color='#676767cf' /> */}
+          <Text
+            style={[
+              activeIndex === index && isSelected
+                ? styles.textActive
+                : styles.textInactive,
+              ,
+              styles.text,
+            ]}
+          >
+            {item}
+          </Text>
+
+          {activeIndex === index && isSelected ? (
+            <FontAwesome name='sort-desc' size={24} color='#03AE9D' />
+          ) : null}
+
+          {/* <FontAwesome name='sort-desc' size={24} color='#03AE9D' /> */}
+          {/* <FontAwesome name='sort-asc' size={24} color='#03AE9D' /> */}
         </View>
       </TouchableOpacity>
     );
@@ -86,6 +102,12 @@ const styles = StyleSheet.create({
     fontSize: 20,
     fontWeight: 'bold',
     textTransform: 'capitalize',
+  },
+  textActive: {
+    color: '#03AE9D',
+  },
+  textInactive: {
+    color: '#676767cf',
   },
   sort: {
     flexDirection: 'row',
