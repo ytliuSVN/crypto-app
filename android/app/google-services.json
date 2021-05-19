@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "594247389929",
+    "project_id": "crypto-app-4a420",
+    "storage_bucket": "crypto-app-4a420.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:594247389929:android:abc5da042e6ce8c621d678",
+        "android_client_info": {
+          "package_name": "kaiostech.com.cryptofirebase"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "594247389929-k4vq0i5dckbfd8ch3caofm57qe1vukjc.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBva_fn-fdxtQTguXjNtmeG_HZQJV7BlNM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "594247389929-k4vq0i5dckbfd8ch3caofm57qe1vukjc.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
