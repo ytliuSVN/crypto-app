@@ -32,7 +32,7 @@ const CoinList = ({ navigation, order }) => {
 
   const onRefresh = useCallback(() => {
     setRefreshing(true);
-    // fetching data here
+    fetchCrypto();
     wait(2000).then(() => setRefreshing(false));
   }, []);
 

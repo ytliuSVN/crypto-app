@@ -2,7 +2,7 @@ import React from 'react';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import TabBar from '../components/TabBar';
 import TrackNavigator from '../navigation/TrackNavigator';
-import ProfileNavigator from '../navigation/ProfileNavigator';
+import SettingNavigator from '../navigation/SettingNavigator';
 import SearchNavigator from '../navigation/SearchNavigator';
 
 const Tab = createBottomTabNavigator();
@@ -22,7 +22,7 @@ const TabNavigator = () => {
       />
       <Tab.Screen
         name='Settings'
-        component={ProfileNavigator}
+        component={SettingNavigator}
         initialParams={{ icon: 'setting' }}
       />
     </Tab.Navigator>
