@@ -14,14 +14,10 @@ import {
 import { AntDesign } from '@expo/vector-icons';
 import Badge from './Badge';
 
-const AnimatedPressable = Animated.createAnimatedComponent(Pressable);
 const SPACING = 20;
 const AVATAR_SIZE = 70;
 const ITEM_SIZE = AVATAR_SIZE + SPACING * 3;
-
-const wait = (timeout) => {
-  return new Promise((resolve) => setTimeout(resolve, timeout));
-};
+const AnimatedPressable = Animated.createAnimatedComponent(Pressable);
 
 const CoinList = ({ navigation, order }) => {
   const [coins, setCoins] = useState([]);
@@ -30,8 +26,13 @@ const CoinList = ({ navigation, order }) => {
   const [error, setError] = useState(false);
   const [refreshing, setRefreshing] = useState(false);
 
+  const wait = (timeout) => {
+    return new Promise((resolve) => setTimeout(resolve, timeout));
+  };
+
   const onRefresh = useCallback(() => {
     setRefreshing(true);
+    // fetching data here
     wait(2000).then(() => setRefreshing(false));
   }, []);
 
@@ -69,13 +70,8 @@ const CoinList = ({ navigation, order }) => {
   const scrollY = useRef(new Animated.Value(0)).current;
 
   const renderItem = ({ item, index }) => {
-    const inputRange = [-1, 0, ITEM_SIZE * index, ITEM_SIZE * (index + 2)];
-    const opacityInputRange = [
-      -1,
-      0,
-      ITEM_SIZE * index,
-      ITEM_SIZE * (index + 1.2),
-    ];
+    const inputRange = [-1, 0, ITEM_SIZE * index, ITEM_SIZE * (index + 1.6)];
+    const opacityInputRange = [-1, 0, ITEM_SIZE * index, ITEM_SIZE * (index + 1.2)];
 
     const scale = scrollY.interpolate({
       inputRange,
@@ -97,12 +93,12 @@ const CoinList = ({ navigation, order }) => {
       return (Math.round(num * 100) / 100).toFixed(2);
     };
 
-    const renderPriceChange = (price) => {
+    const renderPriceChange = (num) => {
       return (
-        <Text style={price > 0 ? styles.rise : styles.drop}>
+        <Text style={num > 0 ? styles.rise : styles.drop}>
           <AntDesign
-            name={price > 0 ? 'caretup' : 'caretdown'}
-            color={price > 0 ? '#03AE9D' : '#fb2c33'}
+            name={num > 0 ? 'caretup' : 'caretdown'}
+            color={num > 0 ? '#03AE9D' : '#fb2c33'}
             size={10}
           />{' '}
           {percentageFormat(item.price_change_percentage_24h)}%
@@ -110,15 +106,14 @@ const CoinList = ({ navigation, order }) => {
       );
     };
 
+    const anim = {
+      transform: [{ scale }],
+      opacity,
+    };
+
     return (
       <AnimatedPressable
-        style={[
-          styles.cardList,
-          {
-            transform: [{ scale }],
-            opacity,
-          },
-        ]}
+        style={[styles.cardList, anim]}
         onPress={() => navigation.navigate('Detail', { itemId: `${item.id}` })}
       >
         <Image style={styles.itemImage} source={{ uri: item.image }} />
@@ -171,9 +166,7 @@ const CoinList = ({ navigation, order }) => {
       data={coins}
       onScroll={Animated.event(
         [{ nativeEvent: { contentOffset: { y: scrollY } } }],
-        {
-          useNativeDriver: true,
-        }
+        { useNativeDriver: true }
       )}
       renderItem={renderItem}
       keyExtractor={(item) => item.id}
