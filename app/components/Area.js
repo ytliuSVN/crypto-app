@@ -46,14 +46,24 @@ const Area = ({ coinId, selectedIndex }) => {
   };
 
   const Line = ({ line }) => (
-    <Path key={'line'} d={line} stroke={'rgb(3, 174, 157)'} fill={'none'} strokeWidth='1.5' />
+    <Path
+      key={'line'}
+      d={line}
+      stroke={'rgb(3, 174, 157)'}
+      fill={'none'}
+      strokeWidth='1.5'
+    />
   );
 
   const Gradient = ({ index }) => (
     <Defs key={index}>
       <LinearGradient id={'gradient'} x1={'0%'} y1={'0%'} x2={'0%'} y2={'80%'}>
         <Stop offset={'0%'} stopColor={'rgb(35, 196, 188)'} stopOpacity={0.3} />
-        <Stop offset={'100%'} stopColor={'rgb(179, 255, 251)'} stopOpacity={0.1} />
+        <Stop
+          offset={'100%'}
+          stopColor={'rgb(179, 255, 251)'}
+          stopOpacity={0.1}
+        />
       </LinearGradient>
     </Defs>
   );
@@ -75,9 +85,9 @@ const Area = ({ coinId, selectedIndex }) => {
           svg={labelsY}
           formatLabel={(value) => `${formatCash(value)}`}
         />
-        <View style={styles.main}>
+        <View style={styles.container}>
           <AreaChart
-            style={styles.container}
+            style={styles.main}
             data={data}
             contentInset={contentInset}
             curve={shape.curveNatural}
@@ -90,14 +100,14 @@ const Area = ({ coinId, selectedIndex }) => {
             <Line />
             <Gradient />
           </AreaChart>
-          {/* <XAxis
+          <XAxis
             style={styles.xAxis}
             data={data}
             contentInset={{ left: 30, right: 30 }}
-            numberOfTicks={6}
+            numberOfTicks={15}
             svg={labelsX}
             formatLabel={(value, index) => index}
-          /> */}
+          />
         </View>
       </SafeAreaView>
     );
@@ -120,25 +130,26 @@ export default React.memo(Area);
 
 const styles = StyleSheet.create({
   wrapper: {
-    height: height / 2,
+    height: height / 2 + 60,
     flexDirection: 'row',
-  },
-  main: {
-    flexDirection: 'column',
+    padding: 20,
   },
   container: {
+    flexDirection: 'column',
+    paddingLeft: 10,
+  },
+  main: {
     height: height / 2,
     width: width - 80,
-    marginLeft: 12,
   },
   xAxis: {
-    marginHorizontal: -10,
+    marginHorizontal: -15,
     marginTop: 10,
     height: 20,
   },
   loader: {
     justifyContent: 'space-around',
-    height: height / 2,
+    height: height / 2 + 60,
     width: width - 80,
   },
 });
