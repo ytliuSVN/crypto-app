@@ -5,6 +5,7 @@ const useRequest = (initUrl) => {
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState({});
+  // const [arrayHolder, setArrayHolder] = useState([]);
 
   useEffect(() => {
     let ignore = false;
@@ -13,7 +14,18 @@ const useRequest = (initUrl) => {
       try {
         setError({});
         const res = await axios(initUrl);
-        if (!ignore) setData(res.data.prices.map((x) => x[1]));
+        if (!ignore) {
+          // setArrayHolder(res.data.prices);
+          // let obj = {};
+          // let newData = [];
+          // arrayHolder.forEach((item) => {
+          //   obj['timestamp'] = item[0];
+          //   obj['value'] = item[1];
+          //   newData.push(obj);
+          // });
+          // setData(newData);
+          setData(res.data.prices.map((x) => x[1]))
+        }
       } catch (err) {
         setError(err);
       }

@@ -37,13 +37,7 @@ const Area = ({ coinId, selectedIndex }) => {
 
   const contentInset = { top: 30, bottom: 30 };
   const labelsY = { fill: 'grey', fontSize: 10 };
-  const labelsX = {
-    fill: 'gray',
-    fontSize: 10,
-    rotation: 20,
-    originY: 30,
-    y: 5,
-  };
+  const labelsX = { fill: 'gray', fontSize: 10, rotation: 20, originY: 30, y: 5 };
 
   const Line = ({ line }) => (
     <Path
@@ -59,11 +53,7 @@ const Area = ({ coinId, selectedIndex }) => {
     <Defs key={index}>
       <LinearGradient id={'gradient'} x1={'0%'} y1={'0%'} x2={'0%'} y2={'80%'}>
         <Stop offset={'0%'} stopColor={'rgb(35, 196, 188)'} stopOpacity={0.3} />
-        <Stop
-          offset={'100%'}
-          stopColor={'rgb(179, 255, 251)'}
-          stopOpacity={0.1}
-        />
+        <Stop offset={'100%'} stopColor={'rgb(179, 255, 251)'} stopOpacity={0.1} />
       </LinearGradient>
     </Defs>
   );
@@ -84,6 +74,7 @@ const Area = ({ coinId, selectedIndex }) => {
           contentInset={contentInset}
           svg={labelsY}
           formatLabel={(value) => `${formatCash(value)}`}
+          // yAccessor={({ item }) => item.value}
         />
         <View style={styles.container}>
           <AreaChart
@@ -92,6 +83,8 @@ const Area = ({ coinId, selectedIndex }) => {
             contentInset={contentInset}
             curve={shape.curveNatural}
             svg={{ fill: 'url(#gradient)' }}
+            // yAccessor={({ item }) => item.value}
+            // xAccessor={({ item }) => item.timestamp}
           >
             <Grid
               svg={{ stroke: 'rgba(151, 151, 151, 0.09)' }}
@@ -104,9 +97,10 @@ const Area = ({ coinId, selectedIndex }) => {
             style={styles.xAxis}
             data={data}
             contentInset={{ left: 30, right: 30 }}
-            numberOfTicks={15}
+            numberOfTicks={14}
             svg={labelsX}
-            formatLabel={(value, index) => index}
+            // formatLabel={(value) => getDateFromTimestamp(value)}
+            // xAccessor={({ item }) => item.timestamp}
           />
         </View>
       </SafeAreaView>
