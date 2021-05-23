@@ -44,6 +44,20 @@ const XAxisScaleTimeExample = () => {
     },
   ];
 
+  const getDateFromTimestamp = (unixTimeStamp) => {
+    let date = new Date(unixTimeStamp);
+    return (
+      (`0${date.getMonth() + 1}`).slice(-2) + '/' + (`0${date.getDate()}`).slice(-2)
+    );
+  };
+
+  const getDateTimeFromTimestamp = (unixTimeStamp) => {
+    let date = new Date(unixTimeStamp);
+    return (
+      (`0${date.getHours()}`).slice(-2) + ':' + (`0${date.getMinutes()}`).slice(-2)
+    );
+  };
+
   return (
     <View style={{ height: 200, width: width - 20, padding: 20 }}>
       <View style={{ height: 200, flexDirection: 'row' }}>
@@ -55,7 +69,7 @@ const XAxisScaleTimeExample = () => {
             fontSize: 10,
           }}
           numberOfTicks={10}
-          formatLabel={(value) => `${value}€`}
+          formatLabel={(value) => `${value} €`}
           yAccessor={({ item }) => item.value}
         />
         <View style={{ flexDirection: 'column', flex: 1, paddingLeft: 10 }}>
@@ -71,7 +85,7 @@ const XAxisScaleTimeExample = () => {
           <XAxis
             data={data}
             svg={{
-              fill: 'black',
+              fill: 'grey',
               fontSize: 8,
               fontWeight: 'bold',
               rotation: 20,
@@ -79,10 +93,10 @@ const XAxisScaleTimeExample = () => {
               y: 5,
             }}
             xAccessor={({ item }) => item.timestamp}
-            numberOfTicks={6}
-            style={{ marginHorizontal: -15, height: 20 }}
+            style={{ marginHorizontal: -5, height: 20, marginTop: 5 }}
             contentInset={{ left: 10, right: 25 }}
-            formatLabel={(value) => value}
+            formatLabel={(value) => getDateFromTimestamp(value)}
+            // formatLabel={(value) => new Date(value).toLocaleTimeString('en-US')}
           />
         </View>
       </View>
