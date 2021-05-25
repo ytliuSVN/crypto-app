@@ -1,32 +1,34 @@
 import React from 'react';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import TabBar from '../components/TabBar';
-import TrackNavigator from '../navigation/TrackNavigator';
-import SearchNavigator from '../navigation/SearchNavigator';
-import SettingNavigator from '../navigation/SettingNavigator';
+import {
+  MainStackNavigator,
+  SearchStackNavigator,
+  SettingStackNavigator,
+} from './StackNavigator';
 
 const Tab = createBottomTabNavigator();
 
-const TabNavigator = () => {
+const BottomTabNavigator = () => {
   return (
     <Tab.Navigator tabBar={(props) => <TabBar {...props} />}>
       <Tab.Screen
         name='Track'
-        component={TrackNavigator}
+        component={MainStackNavigator}
         initialParams={{ icon: 'eye' }}
       />
       <Tab.Screen
         name='Search'
-        component={SearchNavigator}
+        component={SearchStackNavigator}
         initialParams={{ icon: 'search1' }}
       />
       <Tab.Screen
         name='Settings'
-        component={SettingNavigator}
+        component={SettingStackNavigator}
         initialParams={{ icon: 'setting' }}
       />
     </Tab.Navigator>
   );
 };
 
-export default TabNavigator;
+export default BottomTabNavigator;
