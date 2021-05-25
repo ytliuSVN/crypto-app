@@ -1,6 +1,7 @@
 import React from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
 import Setting from '../components/Setting';
+import Icon from 'react-native-vector-icons/Ionicons';
 
 const Stack = createStackNavigator();
 
@@ -16,10 +17,25 @@ const screenOptions = {
   headerTintColor: '#fff',
 };
 
-const SettingNavigator = () => {
+const SettingNavigator = ({ navigation }) => {
   return (
     <Stack.Navigator screenOptions={screenOptions}>
-      <Stack.Screen name='Settings' component={Setting} />
+      <Stack.Screen
+        name='Settings'
+        component={Setting}
+        options={{
+          headerLeft: () => (
+            <Icon.Button
+              name='ios-menu'
+              size={30}
+              backgroundColor='#03AE9D'
+              onPress={() => {
+                navigation.toggleDrawer();
+              }}
+            />
+          ),
+        }}
+      />
     </Stack.Navigator>
   );
 };
