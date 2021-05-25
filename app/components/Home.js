@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useCallback } from 'react';
 import {
   StatusBar,
   StyleSheet,
@@ -13,9 +13,10 @@ import FloatingButton from './FloatingButton';
 const Home = ({ navigation }) => {
   const [sortTarget, setSortTarget] = useState('market_cap_desc');
   const [modalVisible, setModalVisible] = useState(false);
-  const changeModalVisibility = (bool) => {
-    setModalVisible(bool);
-  };
+  const changeModalVisibility = useCallback(
+    (bool) => setModalVisible(bool),
+    []
+  );
 
   const setData = (option) => {
     setSortTarget(option);
@@ -45,7 +46,7 @@ const Home = ({ navigation }) => {
           setData={setData}
         />
       </Modal>
-      <CoinList navigation={navigation} order={sortTarget}/>
+      <CoinList navigation={navigation} order={sortTarget} />
     </SafeAreaView>
   );
 };
