@@ -7,11 +7,8 @@ const Drawer = createDrawerNavigator();
 
 const DrawerNavigator = () => {
   return (
-    <Drawer.Navigator
-      initialRouteName='Track'
-      drawerContent={(props) => <DrawerContent {...props} />}
-    >
-      <Drawer.Screen name='Track' component={BottomTabNavigator} />
+    <Drawer.Navigator drawerContent={(props) => <DrawerContent {...props} />}>
+      <Drawer.Screen name='HomeDrawer' component={BottomTabNavigator} />
     </Drawer.Navigator>
   );
 };
