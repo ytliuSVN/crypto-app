@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { View, StyleSheet, Dimensions } from 'react-native';
 import Tab from './Tab';
-const { width } = Dimensions.get('screen');
 
 const TabBar = ({ state, navigation }) => {
   const [selected, setSelected] = useState('Track');
@@ -34,6 +33,8 @@ const TabBar = ({ state, navigation }) => {
 };
 
 export default TabBar;
+
+const { width } = Dimensions.get('screen');
 
 const styles = StyleSheet.create({
   wrapper: {
