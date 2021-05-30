@@ -29,6 +29,14 @@ A Crypto Tracker App inspired by SpiralDev's [**CryptoTracker**](https://github.
 | :-: | :-: | :-: |
 | ![Prices Screen](./assets/screenshot/prices.png) | ![Detail Screen](./assets/screenshot/detail.png) | ![Sorted By](./assets/screenshot/sorted.png) |
 
+### User Registration
+
+| Splash Screen  | Sign In Screen | Sign Up Screen |
+| :-: | :-: | :-: |
+| ![Splash Screen](./assets/screenshot/splash.png) | ![Sign In Screen](./assets/screenshot/login.png) | ![Sign Up](./assets/screenshot/signup.png) |
+
+
+
 ### Loading Environment Variables
 
 In the root directory/top-level of your app, create a `.env` file.
