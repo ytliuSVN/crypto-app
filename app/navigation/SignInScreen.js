@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {
   View,
   Text,
@@ -15,6 +15,45 @@ import { AntDesign } from '@expo/vector-icons';
 import Feather from 'react-native-vector-icons/Feather';
 
 const SignInScreen = ({ navigation }) => {
+  const initialState = {
+    email: '',
+    password: '',
+    check_textInputChange: false,
+    secureTextEntry: true,
+  };
+
+  const [data, setData] = React.useState(initialState);
+
+  const textInputChange = (val) => {
+    if (val.trim().length != 0) {
+      setData({
+        ...data,
+        email: val,
+        check_textInputChange: true,
+      });
+    } else {
+      setData({
+        ...data,
+        email: val,
+        check_textInputChange: false,
+      });
+    }
+  };
+
+  const handlePasswordChange = (val) => {
+    setData({
+      ...data,
+      password: val,
+    });
+  };
+
+  const updateSecureTextEntry = () => {
+    setData({
+      ...data,
+      secureTextEntry: !data.secureTextEntry,
+    });
+  };
+
   return (
     <View style={styles.container}>
       <View style={styles.header}>
@@ -28,19 +67,33 @@ const SignInScreen = ({ navigation }) => {
             placeholder='Your Email'
             style={styles.textInput}
             autoCapitalize='none'
+            onChangeText={(val) => textInputChange(val)}
           />
-          <Feather name='check-circle' color='green' size={20} />
+
+          {data.check_textInputChange ? (
+            <Animatable.View animation='bounceIn'>
+              <Feather name='check-circle' color='green' size={20} />
+            </Animatable.View>
+          ) : null}
         </View>
         <Text style={[styles.textFooter, { marginTop: 35 }]}>Password</Text>
         <View style={styles.action}>
           <AntDesign name='lock1' color='#05375a' size={20} />
           <TextInput
             placeholder='Your Password'
-            secureTextEntry={true}
+            secureTextEntry={data.secureTextEntry ? true : false}
             style={styles.textInput}
             autoCapitalize='none'
+            onChangeText={(val) => handlePasswordChange(val)}
           />
-          <Feather name='eye-off' color='green' size={20} />
+
+          <TouchableOpacity onPress={updateSecureTextEntry}>
+            {data.secureTextEntry ? (
+              <Feather name='eye-off' color='green' size={20} />
+            ) : (
+              <Feather name='eye' color='grey' size={20} />
+            )}
+          </TouchableOpacity>
         </View>
       </View>
     </View>

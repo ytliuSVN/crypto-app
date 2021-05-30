@@ -9,7 +9,7 @@ import {
 } from 'react-native';
 import * as Animatable from 'react-native-animatable';
 import { LinearGradient } from 'expo-linear-gradient';
-import { AntDesign } from '@expo/vector-icons';
+import Feather from 'react-native-vector-icons/Feather';
 
 const SplashScreen = ({ navigation }) => {
   return (
@@ -33,7 +33,7 @@ const SplashScreen = ({ navigation }) => {
               style={styles.signIn}
             >
               <Text style={styles.textSign}>Get Started</Text>
-              <AntDesign name='arrowright' color='#fff' size={20} />
+              <Feather name='arrow-right' color='#fff' size={20} />
             </LinearGradient>
           </TouchableOpacity>
         </View>
