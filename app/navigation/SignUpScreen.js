@@ -24,7 +24,7 @@ const SignUpScreen = ({ navigation }) => {
     confirm_secureTextEntry: true,
   };
 
-  const [data, setData] = React.useState(initialState);
+  const [data, setData] = useState(initialState);
 
   const textInputChange = (val) => {
     if (val.trim().length != 0) {

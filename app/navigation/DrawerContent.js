@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { View, StyleSheet } from 'react-native';
 import {
   Avatar,
@@ -11,9 +11,10 @@ import {
 } from 'react-native-paper';
 import { DrawerContentScrollView, DrawerItem } from '@react-navigation/drawer';
 import { AntDesign } from '@expo/vector-icons';
+import { AuthContext } from '../components/context';
 
 export function DrawerContent(props) {
-  // const { signOut, toggleTheme } = useContext(AuthContext);
+  const { signOut } = useContext(AuthContext);
 
   const [isDarkTheme, setIsDarkTheme] = useState(false);
   const toggleTheme = () => {
@@ -101,7 +102,7 @@ export function DrawerContent(props) {
           )}
           label='Sign Out'
           onPress={() => {
-            // signOut();
+            signOut();
           }}
         />
       </Drawer.Section>

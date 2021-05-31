@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import {
   View,
   Text,
@@ -13,6 +13,7 @@ import * as Animatable from 'react-native-animatable';
 import { LinearGradient } from 'expo-linear-gradient';
 import { AntDesign } from '@expo/vector-icons';
 import Feather from 'react-native-vector-icons/Feather';
+import { AuthContext } from '../components/context';
 
 const SignInScreen = ({ navigation }) => {
   const initialState = {
@@ -22,7 +23,9 @@ const SignInScreen = ({ navigation }) => {
     secureTextEntry: true,
   };
 
-  const [data, setData] = React.useState(initialState);
+  const [data, setData] = useState(initialState);
+
+  const { signIn } = useContext(AuthContext);
 
   const textInputChange = (val) => {
     if (val.trim().length != 0) {
@@ -98,7 +101,12 @@ const SignInScreen = ({ navigation }) => {
         </View>
 
         <View style={styles.button}>
-          <TouchableOpacity style={styles.signIn}>
+          <TouchableOpacity
+            style={styles.signIn}
+            onPress={() => {
+              signIn();
+            }}
+          >
             <LinearGradient
               colors={['#08d4c4', '#01ab9d']}
               style={styles.signIn}
