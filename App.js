@@ -69,8 +69,9 @@ const App = () => {
         dispatch({ type: 'LOGIN', id: userName, token: userToken });
       },
       signOut: () => {
-        setUserToken(null);
-        setIsLoading(false);
+        // setUserToken(null);
+        // setIsLoading(false);
+        dispatch({ type: 'LOGOUT' });
       },
       signUp: () => {
         setUserToken('test');
