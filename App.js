@@ -1,12 +1,17 @@
 import React, { useState, useEffect, useMemo, useReducer } from 'react';
 import { View, ActivityIndicator } from 'react-native';
-import { NavigationContainer } from '@react-navigation/native';
-import DrawerNavigator from './app/navigation/DrawerNavigator';
 import { AuthContext } from './app/components/context';
+import { NavigationContainer } from '@react-navigation/native';
+import { createDrawerNavigator } from '@react-navigation/drawer';
+import { DrawerContent } from './app/navigation/DrawerContent';
+import BottomTabNavigator from './app/navigation/TabNavigator';
+import RootStackScreen from './app/navigation/RootStackScreen';
+
+const Drawer = createDrawerNavigator();
 
 const App = () => {
-  const [userToken, setUserToken] = useState(null);
-  const [isLoading, setIsLoading] = useState(true);
+  // const [userToken, setUserToken] = useState(null);
+  // const [isLoading, setIsLoading] = useState(true);
 
   const initialLoginState = {
     userName: null,
@@ -52,9 +57,16 @@ const App = () => {
 
   const authContext = useMemo(
     () => ({
-      signIn: () => {
-        setUserToken('test');
-        setIsLoading(false);
+      signIn: (userName, password) => {
+        // setUserToken('test');
+        // setIsLoading(false);
+        let userToken;
+        userToken = null;
+        if (userName === 'KaiOS' && password === 'kaiostech') {
+          userToken = 'kaiosrt';
+        }
+        // console.log('user token: ', userToken);
+        dispatch({ type: 'LOGIN', id: userName, token: userToken });
       },
       signOut: () => {
         setUserToken(null);
@@ -70,11 +82,12 @@ const App = () => {
 
   useEffect(() => {
     setTimeout(() => {
-      setIsLoading(false);
+      // setIsLoading(false);
+      dispatch({ type: 'RETRIEVE_TOKEN', token: 'kaiosToken' });
     }, 1000);
   }, []);
 
-  if (isLoading) {
+  if (loginState.isLoading) {
     return (
       <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
         <ActivityIndicator size='large' color='#03AE9D' />
@@ -85,7 +98,15 @@ const App = () => {
   return (
     <AuthContext.Provider value={authContext}>
       <NavigationContainer>
-        <DrawerNavigator userToken={userToken} />
+        {loginState.userToken !== null ? (
+          <Drawer.Navigator
+            drawerContent={(props) => <DrawerContent {...props} />}
+          >
+            <Drawer.Screen name='HomeDrawer' component={BottomTabNavigator} />
+          </Drawer.Navigator>
+        ) : (
+          <RootStackScreen />
+        )}
       </NavigationContainer>
     </AuthContext.Provider>
   );
