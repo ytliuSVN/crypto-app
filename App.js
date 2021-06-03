@@ -6,6 +6,7 @@ import { createDrawerNavigator } from '@react-navigation/drawer';
 import { DrawerContent } from './app/navigation/DrawerContent';
 import BottomTabNavigator from './app/navigation/TabNavigator';
 import RootStackScreen from './app/navigation/RootStackScreen';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const Drawer = createDrawerNavigator();
 
@@ -57,20 +58,31 @@ const App = () => {
 
   const authContext = useMemo(
     () => ({
-      signIn: (userName, password) => {
+      signIn: async (userName, password) => {
         // setUserToken('test');
         // setIsLoading(false);
         let userToken;
         userToken = null;
         if (userName === 'KaiOS' && password === 'kaiostech') {
-          userToken = 'kaiosrt';
+          try {
+            userToken = 'kaiosrt';
+            await AsyncStorage.setItem('userToken', userToken);
+          } catch (e) {
+            console.log(e);
+          }
         }
+
         // console.log('user token: ', userToken);
         dispatch({ type: 'LOGIN', id: userName, token: userToken });
       },
-      signOut: () => {
+      signOut: async () => {
         // setUserToken(null);
         // setIsLoading(false);
+        try {
+          await AsyncStorage.removeItem('userToken');
+        } catch (e) {
+          console.log(e);
+        }
         dispatch({ type: 'LOGOUT' });
       },
       signUp: () => {
@@ -82,9 +94,17 @@ const App = () => {
   );
 
   useEffect(() => {
-    setTimeout(() => {
+    setTimeout(async () => {
       // setIsLoading(false);
-      dispatch({ type: 'RETRIEVE_TOKEN', token: 'kaiosToken' });
+      let userToken;
+      userToken = null;
+      try {
+        userToken = await AsyncStorage.getItem('userToken');
+      } catch (e) {
+        console.log(e);
+      }
+
+      dispatch({ type: 'RETRIEVE_TOKEN', token: userToken });
     }, 1000);
   }, []);
 
