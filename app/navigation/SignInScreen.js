@@ -22,6 +22,8 @@ const SignInScreen = ({ navigation }) => {
     password: '',
     check_textInputChange: false,
     secureTextEntry: true,
+    isValidUser: true,
+    isValidPassword: true,
   };
 
   const [data, setData] = useState(initialState);
@@ -29,12 +31,13 @@ const SignInScreen = ({ navigation }) => {
   const { signIn } = useContext(AuthContext);
 
   const textInputChange = (val) => {
-    if (val.trim().length != 0) {
+    if (val.trim().length >= 4) {
       setData({
         ...data,
         // email: val,
         username: val,
         check_textInputChange: true,
+        isValidUser: true,
       });
     } else {
       setData({
@@ -42,15 +45,25 @@ const SignInScreen = ({ navigation }) => {
         // email: val,
         username: val,
         check_textInputChange: false,
+        isValidUser: false,
       });
     }
   };
 
   const handlePasswordChange = (val) => {
-    setData({
-      ...data,
-      password: val,
-    });
+    if (val.trim().length >= 8) {
+      setData({
+        ...data,
+        password: val,
+        isValidPassword: true,
+      });
+    } else {
+      setData({
+        ...data,
+        password: val,
+        isValidPassword: false,
+      });
+    }
   };
 
   const updateSecureTextEntry = () => {
@@ -58,6 +71,20 @@ const SignInScreen = ({ navigation }) => {
       ...data,
       secureTextEntry: !data.secureTextEntry,
     });
+  };
+
+  const handleValidUser = (val) => {
+    if (val.trim().length >= 4) {
+      setData({
+        ...data,
+        isValidUser: true,
+      });
+    } else {
+      setData({
+        ...data,
+        isValidUser: false,
+      });
+    }
   };
 
   const loginHandle = (userName, password) => {
@@ -71,14 +98,16 @@ const SignInScreen = ({ navigation }) => {
       </View>
 
       <Animatable.View animation='fadeInUpBig' style={styles.footer}>
-        <Text style={styles.textFooter}>Email</Text>
+        <Text style={styles.textFooter}>Username</Text>
         <View style={styles.action}>
           <AntDesign name='user' color='#05375a' size={20} />
           <TextInput
-            placeholder='Your Email'
+            // placeholder='Your Email'
+            placeholder='Your Username'
             style={styles.textInput}
             autoCapitalize='none'
             onChangeText={(val) => textInputChange(val)}
+            onEndEditing={(e) => handleValidUser(e.nativeEvent.text)}
           />
 
           {data.check_textInputChange ? (
@@ -87,6 +116,15 @@ const SignInScreen = ({ navigation }) => {
             </Animatable.View>
           ) : null}
         </View>
+
+        {data.isValidUser ? null : (
+          <Animatable.View animation='fadeInLeft' duration={500}>
+            <Text style={styles.errorMsg}>
+              Username must be 4 characters long.
+            </Text>
+          </Animatable.View>
+        )}
+
         <Text style={[styles.textFooter, { marginTop: 35 }]}>Password</Text>
         <View style={styles.action}>
           <AntDesign name='lock1' color='#05375a' size={20} />
@@ -106,6 +144,14 @@ const SignInScreen = ({ navigation }) => {
             )}
           </TouchableOpacity>
         </View>
+
+        {data.isValidPassword ? null : (
+          <Animatable.View animation='fadeInLeft' duration={500}>
+            <Text style={styles.errorMsg}>
+              Password must be 8 characters long.
+            </Text>
+          </Animatable.View>
+        )}
 
         <View style={styles.button}>
           <TouchableOpacity
@@ -201,6 +247,10 @@ const styles = StyleSheet.create({
     marginTop: Platform.OS === 'ios' ? 0 : -4,
     paddingLeft: 10,
     color: '#05375a',
+  },
+  errorMsg: {
+    color: '#fb2c33',
+    fontSize: 14,
   },
   button: {
     alignItems: 'center',
