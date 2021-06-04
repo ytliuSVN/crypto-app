@@ -8,12 +8,14 @@ import {
   Dimensions,
   Platform,
   TextInput,
+  Alert,
 } from 'react-native';
 import * as Animatable from 'react-native-animatable';
 import { LinearGradient } from 'expo-linear-gradient';
 import { AntDesign } from '@expo/vector-icons';
 import Feather from 'react-native-vector-icons/Feather';
 import { AuthContext } from '../components/context';
+import Users from '../../model/users';
 
 const SignInScreen = ({ navigation }) => {
   const initialState = {
@@ -88,7 +90,18 @@ const SignInScreen = ({ navigation }) => {
   };
 
   const loginHandle = (userName, password) => {
-    signIn(userName, password);
+    const foundUser = Users.filter((item) => {
+      return userName == item.username && password == item.password;
+    });
+
+    if (foundUser.length == 0) {
+      Alert.alert('Invalid User!', 'Username or password is incorrect.', [
+        { text: 'Okay' },
+      ]);
+      return;
+    }
+
+    signIn(foundUser);
   };
 
   return (

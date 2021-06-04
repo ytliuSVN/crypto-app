@@ -58,20 +58,18 @@ const App = () => {
 
   const authContext = useMemo(
     () => ({
-      signIn: async (userName, password) => {
+      signIn: async (foundUser) => {
         // setUserToken('test');
         // setIsLoading(false);
         let userToken;
         userToken = null;
-        if (userName === 'KaiOS' && password === 'kaiostech') {
-          try {
-            userToken = 'kaiosrt';
-            await AsyncStorage.setItem('userToken', userToken);
-          } catch (e) {
-            console.log(e);
-          }
-        }
 
+        try {
+          userToken = 'kaiosrt';
+          await AsyncStorage.setItem('userToken', userToken);
+        } catch (e) {
+          console.log(e);
+        }
         // console.log('user token: ', userToken);
         dispatch({ type: 'LOGIN', id: userName, token: userToken });
       },
