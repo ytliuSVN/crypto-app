@@ -61,8 +61,8 @@ const App = () => {
       signIn: async (foundUser) => {
         // setUserToken('test');
         // setIsLoading(false);
-        let userToken;
-        userToken = null;
+        const userToken = String(foundUser[0].userToken);
+        const userName = String(foundUser[0].username);
 
         try {
           userToken = 'kaiosrt';
