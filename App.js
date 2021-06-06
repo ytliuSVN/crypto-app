@@ -1,8 +1,21 @@
 import React, { useState, useEffect, useMemo, useReducer } from 'react';
 import { View, ActivityIndicator } from 'react-native';
 import { AuthContext } from './app/components/context';
-import { NavigationContainer } from '@react-navigation/native';
+
+import {
+  NavigationContainer,
+  DefaultTheme as NavigationDefaultTheme,
+  DarkTheme as NavigationDarkTheme,
+} from '@react-navigation/native';
+
 import { createDrawerNavigator } from '@react-navigation/drawer';
+
+import {
+  Provider as PaperProvider,
+  DefaultTheme as PaperDefaultTheme,
+  DarkTheme as PaperDarkTheme,
+} from 'react-native-paper';
+
 import { DrawerContent } from './app/navigation/DrawerContent';
 import BottomTabNavigator from './app/navigation/TabNavigator';
 import RootStackScreen from './app/navigation/RootStackScreen';
@@ -13,6 +26,8 @@ const Drawer = createDrawerNavigator();
 const App = () => {
   // const [userToken, setUserToken] = useState(null);
   // const [isLoading, setIsLoading] = useState(true);
+
+  const [isDarkTheme, setIsDarkTheme] = useState(false);
 
   const initialLoginState = {
     userName: null,
@@ -87,6 +102,9 @@ const App = () => {
         setUserToken('test');
         setIsLoading(false);
       },
+      toggleTheme: () => {
+        setIsDarkTheme((isDarkTheme) => !isDarkTheme);
+      },
     }),
     []
   );
@@ -115,19 +133,21 @@ const App = () => {
   }
 
   return (
-    <AuthContext.Provider value={authContext}>
-      <NavigationContainer>
-        {loginState.userToken !== null ? (
-          <Drawer.Navigator
-            drawerContent={(props) => <DrawerContent {...props} />}
-          >
-            <Drawer.Screen name='HomeDrawer' component={BottomTabNavigator} />
-          </Drawer.Navigator>
-        ) : (
-          <RootStackScreen />
-        )}
-      </NavigationContainer>
-    </AuthContext.Provider>
+    <PaperProvider theme={PaperDarkTheme}>
+      <AuthContext.Provider value={authContext}>
+        <NavigationContainer theme={NavigationDarkTheme}>
+          {loginState.userToken !== null ? (
+            <Drawer.Navigator
+              drawerContent={(props) => <DrawerContent {...props} />}
+            >
+              <Drawer.Screen name='HomeDrawer' component={BottomTabNavigator} />
+            </Drawer.Navigator>
+          ) : (
+            <RootStackScreen />
+          )}
+        </NavigationContainer>
+      </AuthContext.Provider>
+    </PaperProvider>
   );
 };
 

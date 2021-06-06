@@ -14,12 +14,8 @@ import { AntDesign } from '@expo/vector-icons';
 import { AuthContext } from '../components/context';
 
 export function DrawerContent(props) {
-  const { signOut } = useContext(AuthContext);
+  const { signOut, toggleTheme } = useContext(AuthContext);
 
-  const [isDarkTheme, setIsDarkTheme] = useState(false);
-  const toggleTheme = () => {
-    setIsDarkTheme(!isDarkTheme);
-  };
   return (
     <View style={styles.container}>
       <DrawerContentScrollView {...props}>
@@ -88,7 +84,7 @@ export function DrawerContent(props) {
               <View style={styles.preference}>
                 <Text>Dark Theme</Text>
                 <View pointerEvents='none'>
-                  <Switch value={isDarkTheme} />
+                  {/* <Switch value={isDarkTheme} /> */}
                 </View>
               </View>
             </TouchableRipple>
