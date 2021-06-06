@@ -20,6 +20,7 @@ A Crypto Tracker App inspired by SpiralDev's [**CryptoTracker**](https://github.
 - [ ] The user can request the list of cryptocurrencies from the CoinGecko API and see the results collated together.
 - [ ] Progressively load more list items by scrolling down the list.
 - [ ] The user can sort the cryptocurrencies based on their `Market Cap` and `Volume`.
+- [ ] The application supports theming and can easily be switched between themes.
 
 ## App Details
 
@@ -31,10 +32,9 @@ A Crypto Tracker App inspired by SpiralDev's [**CryptoTracker**](https://github.
 
 ### User Registration
 
-| Splash Screen  | Sign In Screen | Sign Up Screen |
+| Splash Screen  | Sign In Screen | Dark Theme Sign Up |
 | :-: | :-: | :-: |
-| ![Splash Screen](./assets/screenshot/splash.png) | ![Sign In Screen](./assets/screenshot/login.png) | ![Sign Up](./assets/screenshot/signup.png) |
-
+| ![Splash Screen](./assets/screenshot/splash.png) | ![Sign In Screen](./assets/screenshot/login.png)  |  ![Sign Up](./assets/screenshot/d_signup.png) |
 
 
 ### Loading Environment Variables
