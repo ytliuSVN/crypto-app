@@ -35,6 +35,36 @@ const App = () => {
     isLoading: true,
   };
 
+  const CustomDefaultTheme = {
+    ...NavigationDefaultTheme,
+    ...PaperDefaultTheme,
+    colors: {
+      ...NavigationDefaultTheme.colors,
+      ...PaperDefaultTheme.colors,
+      background: '#ffffff',
+      text: '#333333',
+      // primary: '#3498db',
+      // accent: '#f1c40f',
+      // surface: '#ffffff',
+    },
+  };
+
+  const CustomDarkTheme = {
+    ...NavigationDarkTheme,
+    ...PaperDarkTheme,
+    colors: {
+      ...NavigationDarkTheme.colors,
+      ...PaperDarkTheme.colors,
+      background: '#333333',
+      text: '#ffffff',
+      // primary: '#3498db',
+      // accent: '#f1c40f',
+      // surface: '#ffffff',
+    },
+  };
+
+  const theme = isDarkTheme ? CustomDarkTheme : CustomDefaultTheme;
+
   const loginReducer = (prevState, action) => {
     switch (action.type) {
       case 'RETRIEVE_TOKEN':
@@ -133,9 +163,9 @@ const App = () => {
   }
 
   return (
-    <PaperProvider theme={PaperDarkTheme}>
+    <PaperProvider theme={theme}>
       <AuthContext.Provider value={authContext}>
-        <NavigationContainer theme={NavigationDarkTheme}>
+        <NavigationContainer theme={theme}>
           {loginState.userToken !== null ? (
             <Drawer.Navigator
               drawerContent={(props) => <DrawerContent {...props} />}
