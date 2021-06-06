@@ -13,8 +13,10 @@ import * as Animatable from 'react-native-animatable';
 import { LinearGradient } from 'expo-linear-gradient';
 import { AntDesign } from '@expo/vector-icons';
 import Feather from 'react-native-vector-icons/Feather';
+import { useTheme } from '@react-navigation/native';
 
 const SignUpScreen = ({ navigation }) => {
+  const { colors } = useTheme();
   const initialState = {
     email: '',
     password: '',
@@ -76,13 +78,36 @@ const SignUpScreen = ({ navigation }) => {
         <Text style={styles.textHeader}>Register Now!</Text>
       </View>
 
-      <Animatable.View animation='fadeInUpBig' style={styles.footer}>
-        <Text style={styles.textFooter}>Email</Text>
+      <Animatable.View
+        animation='fadeInUpBig'
+        style={[
+          styles.footer,
+          {
+            backgroundColor: colors.background,
+          },
+        ]}
+      >
+        <Text
+          style={[
+            styles.textFooter,
+            {
+              color: colors.text,
+            },
+          ]}
+        >
+          Email
+        </Text>
         <View style={styles.action}>
-          <AntDesign name='user' color='#05375a' size={20} />
+          <AntDesign name='user' color={colors.text} size={20} />
           <TextInput
             placeholder='Your Email'
-            style={styles.textInput}
+            placeholderTextColor='#666666'
+            style={[
+              styles.textInput,
+              {
+                color: colors.text,
+              },
+            ]}
             autoCapitalize='none'
             onChangeText={(val) => textInputChange(val)}
           />
@@ -93,43 +118,73 @@ const SignUpScreen = ({ navigation }) => {
             </Animatable.View>
           ) : null}
         </View>
-        <Text style={[styles.textFooter, { marginTop: 35 }]}>Password</Text>
+        <Text
+          style={[
+            styles.textFooter,
+            {
+              color: colors.text,
+            },
+            { marginTop: 35 },
+          ]}
+        >
+          Password
+        </Text>
         <View style={styles.action}>
-          <AntDesign name='lock1' color='#05375a' size={20} />
+          <AntDesign name='lock1' color={colors.text} size={20} />
           <TextInput
             placeholder='Your Password'
+            placeholderTextColor='#666666'
             secureTextEntry={data.secureTextEntry ? true : false}
-            style={styles.textInput}
+            style={[
+              styles.textInput,
+              {
+                color: colors.text,
+              },
+            ]}
             autoCapitalize='none'
             onChangeText={(val) => handlePasswordChange(val)}
           />
 
           <TouchableOpacity onPress={updateSecureTextEntry}>
             {data.secureTextEntry ? (
-              <Feather name='eye-off' color='green' size={20} />
+              <Feather name='eye-off' color='grey' size={20} />
             ) : (
-              <Feather name='eye' color='grey' size={20} />
+              <Feather name='eye' color={colors.accent} size={20} />
             )}
           </TouchableOpacity>
         </View>
-        <Text style={[styles.textFooter, { marginTop: 35 }]}>
+        <Text
+          style={[
+            styles.textFooter,
+            {
+              color: colors.text,
+            },
+            { marginTop: 35 },
+          ]}
+        >
           Confirm Password
         </Text>
         <View style={styles.action}>
-          <AntDesign name='lock1' color='#05375a' size={20} />
+          <AntDesign name='lock1' color={colors.text} size={20} />
           <TextInput
             placeholder='Confirm Your Password'
+            placeholderTextColor='#666666'
             secureTextEntry={data.confirm_secureTextEntry ? true : false}
-            style={styles.textInput}
+            style={[
+              styles.textInput,
+              {
+                color: colors.text,
+              },
+            ]}
             autoCapitalize='none'
             onChangeText={(val) => handleConfirmPasswordChange(val)}
           />
 
           <TouchableOpacity onPress={updateConfirmSecureTextEntry}>
             {data.secureTextEntry ? (
-              <Feather name='eye-off' color='green' size={20} />
+              <Feather name='eye-off' color='grey' size={20} />
             ) : (
-              <Feather name='eye' color='grey' size={20} />
+              <Feather name='eye' color={colors.accent} size={20} />
             )}
           </TouchableOpacity>
         </View>

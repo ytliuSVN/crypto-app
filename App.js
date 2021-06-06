@@ -43,9 +43,9 @@ const App = () => {
       ...PaperDefaultTheme.colors,
       background: '#ffffff',
       text: '#333333',
-      // primary: '#3498db',
-      // accent: '#f1c40f',
-      // surface: '#ffffff',
+      primary: '#3498db',
+      accent: '#03AE9D',
+      surface: '#ffffff',
     },
   };
 
@@ -56,10 +56,10 @@ const App = () => {
       ...NavigationDarkTheme.colors,
       ...PaperDarkTheme.colors,
       background: '#333333',
-      text: '#ffffff',
-      // primary: '#3498db',
-      // accent: '#f1c40f',
-      // surface: '#ffffff',
+      text: '#f5f6f7',
+      primary: '#3498db',
+      accent: '#03AE9D',
+      surface: '#ffffff',
     },
   };
 
