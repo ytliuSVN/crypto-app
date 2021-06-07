@@ -160,14 +160,14 @@ const SignInScreen = ({ navigation }) => {
 
           {data.check_textInputChange ? (
             <Animatable.View animation='bounceIn'>
-              <Feather name='check-circle' color='green' size={20} />
+              <Feather name='check-circle' color={colors.accent} size={20} />
             </Animatable.View>
           ) : null}
         </View>
 
         {data.isValidUser ? null : (
           <Animatable.View animation='fadeInLeft' duration={500}>
-            <Text style={styles.errorMsg}>
+            <Text style={[styles.errorMsg, { color: colors.danger }]}>
               Username must be 4 characters long.
             </Text>
           </Animatable.View>
@@ -212,7 +212,7 @@ const SignInScreen = ({ navigation }) => {
 
         {data.isValidPassword ? null : (
           <Animatable.View animation='fadeInLeft' duration={500}>
-            <Text style={styles.errorMsg}>
+            <Text style={[styles.errorMsg, { color: colors.danger }]}>
               Password must be 8 characters long.
             </Text>
           </Animatable.View>
@@ -247,7 +247,7 @@ const SignInScreen = ({ navigation }) => {
             style={[
               styles.signIn,
               {
-                borderColor: '#009387',
+                borderColor: colors.success,
                 borderWidth: 1,
                 marginTop: 15,
               },
@@ -257,7 +257,7 @@ const SignInScreen = ({ navigation }) => {
               style={[
                 styles.textSign,
                 {
-                  color: '#009387',
+                  color: colors.success,
                 },
               ]}
             >
@@ -314,7 +314,7 @@ const styles = StyleSheet.create({
     color: '#05375a',
   },
   errorMsg: {
-    color: '#fb2c33',
+    // color: '#fb2c33',
     fontSize: 14,
   },
   button: {

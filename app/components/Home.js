@@ -9,8 +9,10 @@ import {
 import CoinList from './CoinList';
 import ModalPicker from './ModalPicker';
 import FloatingButton from './FloatingButton';
+import { useTheme } from '@react-navigation/native';
 
 const Home = ({ navigation }) => {
+  const theme = useTheme();
   const [sortTarget, setSortTarget] = useState('market_cap_desc');
   const [modalVisible, setModalVisible] = useState(false);
   const changeModalVisibility = useCallback(
@@ -24,6 +26,10 @@ const Home = ({ navigation }) => {
 
   return (
     <SafeAreaView style={styles.container}>
+      <StatusBar
+        backgroundColor='#03AE9D'
+        barStyle={theme.dark ? 'light-content' : 'dark-content'}
+      />
       <Image
         style={styles.itemBGImage}
         source={require('../../assets/wallpaper.jpeg')}

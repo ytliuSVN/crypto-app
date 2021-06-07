@@ -43,9 +43,10 @@ const App = () => {
       ...PaperDefaultTheme.colors,
       background: '#ffffff',
       text: '#333333',
-      primary: '#3498db',
+      danger: '#fb2c33',
       accent: '#03AE9D',
-      surface: '#ffffff',
+      surface: '#efefef',
+      success: '#009387',
     },
   };
 
@@ -57,9 +58,10 @@ const App = () => {
       ...PaperDarkTheme.colors,
       background: '#333333',
       text: '#f5f6f7',
-      primary: '#3498db',
-      accent: '#03AE9D',
-      surface: '#ffffff',
+      danger: '#ff6363',
+      accent: '#5bf5e5',
+      surface: '#333333',
+      success: '#52e3d4',
     },
   };
 

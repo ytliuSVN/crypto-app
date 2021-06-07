@@ -6,6 +6,7 @@ import {
   StyleSheet,
   Dimensions,
   Image,
+  StatusBar,
 } from 'react-native';
 import * as Animatable from 'react-native-animatable';
 import { LinearGradient } from 'expo-linear-gradient';
@@ -14,9 +15,14 @@ import { useTheme } from '@react-navigation/native';
 
 const SplashScreen = ({ navigation }) => {
   const { colors } = useTheme();
+  const theme = useTheme();
 
   return (
     <View style={styles.container}>
+      <StatusBar
+        backgroundColor='#03AE9D'
+        barStyle={theme.dark ? 'light-content' : 'dark-content'}
+      />
       <View style={styles.header}>
         <Animatable.Image
           animation='bounceIn'

@@ -114,7 +114,7 @@ const SignUpScreen = ({ navigation }) => {
 
           {data.check_textInputChange ? (
             <Animatable.View animation='bounceIn'>
-              <Feather name='check-circle' color='green' size={20} />
+              <Feather name='check-circle' color={colors.accent} size={20} />
             </Animatable.View>
           ) : null}
         </View>
@@ -213,7 +213,7 @@ const SignUpScreen = ({ navigation }) => {
             style={[
               styles.signIn,
               {
-                borderColor: '#009387',
+                borderColor: colors.success,
                 borderWidth: 1,
                 marginTop: 15,
               },
@@ -223,7 +223,7 @@ const SignUpScreen = ({ navigation }) => {
               style={[
                 styles.textSign,
                 {
-                  color: '#009387',
+                  color: colors.success,
                 },
               ]}
             >

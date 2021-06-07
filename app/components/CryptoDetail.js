@@ -3,8 +3,10 @@ import PropTypes from 'prop-types';
 import { View, Text, StyleSheet } from 'react-native';
 import { ButtonGroup } from 'react-native-elements';
 import Area from './Area';
+import { useTheme } from '@react-navigation/native';
 
 const CryptoDetail = ({ route }) => {
+  const { colors } = useTheme();
   const [selected, setSelected] = useState(2);
   const buttons = ['1 Day', '1 Week', '1 Month'];
   const { itemId } = route.params;
@@ -23,7 +25,7 @@ const CryptoDetail = ({ route }) => {
   };
 
   return (
-    <View style={styles.container}>
+    <View style={[styles.container, { backgroundColor: colors.surface }]}>
       <Text style={styles.text}>
         {`Price Chart for ${period(selected)}`} (&euro;)
       </Text>
@@ -51,7 +53,6 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor: '#efefef',
   },
   text: {
     fontSize: 20,
