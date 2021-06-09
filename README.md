@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="./assets/minecoin.png" alt="Minecoin" width="90" />
+  <img src="./src/assets/minecoin.png" alt="Minecoin" width="90" />
 </p>
 
 <div align="center">
@@ -28,20 +28,20 @@ A Crypto Tracker App inspired by SpiralDev's [**CryptoTracker**](https://github.
 
 | Prices by Market Cap  | Detail Screen | Sorted By |
 | :-: | :-: | :-: |
-| ![Prices Screen](./assets/screenshot/prices.png) | ![Detail Screen](./assets/screenshot/detail.png) | ![Sorted By](./assets/screenshot/sorted.png) |
+| ![Prices Screen](./src/assets/screenshot/prices.png) | ![Detail Screen](./src/assets/screenshot/detail.png) | ![Sorted By](./src/assets/screenshot/sorted.png) |
 
 ### User Registration
 
 | Splash Screen  | Sign In | Sign Up |
 | :-: | :-: | :-: |
-| ![Splash Screen](./assets/screenshot/splash.png) | ![Sign In](./assets/screenshot/login.png)  |  ![Sign Up](./assets/screenshot/signup.png) |
+| ![Splash Screen](./src/assets/screenshot/splash.png) | ![Sign In](./src/assets/screenshot/login.png)  |  ![Sign Up](./src/assets/screenshot/signup.png) |
 
 
 ### Dark Theme
 
 | Splash Screen  | Sign In | Sign Up |
 | :-: | :-: | :-: |
-| ![Splash Screen](./assets/screenshot/d_splash.png) | ![Sign In](./assets/screenshot/d_login.png)  |  ![Sign Up](./assets/screenshot/d_signup.png) |
+| ![Splash Screen](./src/assets/screenshot/d_splash.png) | ![Sign In](./src/assets/screenshot/d_login.png)  |  ![Sign Up](./src/assets/screenshot/d_signup.png) |
 
 ### Loading Environment Variables
 

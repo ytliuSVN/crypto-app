@@ -1,6 +1,11 @@
 import React, { useState, useEffect, useMemo, useReducer } from 'react';
 import { View, ActivityIndicator } from 'react-native';
-import { AuthContext } from './app/components/context';
+import { AuthContext } from './src/components/context';
+import { createDrawerNavigator } from '@react-navigation/drawer';
+import { DrawerContent } from './src/navigation/DrawerContent';
+import RootStackScreen from './src/navigation/RootStackScreen';
+import BottomTabNavigator from './src/navigation/TabNavigator';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 import {
   NavigationContainer,
@@ -8,18 +13,11 @@ import {
   DarkTheme as NavigationDarkTheme,
 } from '@react-navigation/native';
 
-import { createDrawerNavigator } from '@react-navigation/drawer';
-
 import {
   Provider as PaperProvider,
   DefaultTheme as PaperDefaultTheme,
   DarkTheme as PaperDarkTheme,
 } from 'react-native-paper';
-
-import { DrawerContent } from './app/navigation/DrawerContent';
-import BottomTabNavigator from './app/navigation/TabNavigator';
-import RootStackScreen from './app/navigation/RootStackScreen';
-import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const Drawer = createDrawerNavigator();
 

@@ -32,7 +32,7 @@ const Home = ({ navigation }) => {
       />
       <Image
         style={styles.itemBGImage}
-        source={require('../../assets/wallpaper.jpeg')}
+        source={require('../assets/wallpaper.jpeg')}
         blurRadius={10}
         resizeMode='cover'
       />
