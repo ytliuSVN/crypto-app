@@ -6,18 +6,9 @@ import { DrawerContent } from './src/navigation/DrawerContent';
 import RootStackScreen from './src/navigation/RootStackScreen';
 import BottomTabNavigator from './src/navigation/TabNavigator';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-
-import {
-  NavigationContainer,
-  DefaultTheme as NavigationDefaultTheme,
-  DarkTheme as NavigationDarkTheme,
-} from '@react-navigation/native';
-
-import {
-  Provider as PaperProvider,
-  DefaultTheme as PaperDefaultTheme,
-  DarkTheme as PaperDarkTheme,
-} from 'react-native-paper';
+import { CustomDarkTheme, CustomDefaultTheme } from './src/themes/themeProvider';
+import { NavigationContainer } from '@react-navigation/native';
+import { Provider as PaperProvider } from 'react-native-paper';
 
 const Drawer = createDrawerNavigator();
 
@@ -26,44 +17,13 @@ const App = () => {
   // const [isLoading, setIsLoading] = useState(true);
 
   const [isDarkTheme, setIsDarkTheme] = useState(false);
+  const theme = isDarkTheme ? CustomDarkTheme : CustomDefaultTheme;
 
   const initialLoginState = {
     userName: null,
     userToken: null,
     isLoading: true,
   };
-
-  const CustomDefaultTheme = {
-    ...NavigationDefaultTheme,
-    ...PaperDefaultTheme,
-    colors: {
-      ...NavigationDefaultTheme.colors,
-      ...PaperDefaultTheme.colors,
-      background: '#ffffff',
-      text: '#333333',
-      danger: '#fb2c33',
-      accent: '#03AE9D',
-      surface: '#efefef',
-      success: '#009387',
-    },
-  };
-
-  const CustomDarkTheme = {
-    ...NavigationDarkTheme,
-    ...PaperDarkTheme,
-    colors: {
-      ...NavigationDarkTheme.colors,
-      ...PaperDarkTheme.colors,
-      background: '#333333',
-      text: '#f5f6f7',
-      danger: '#ff6363',
-      accent: '#5bf5e5',
-      surface: '#333333',
-      success: '#52e3d4',
-    },
-  };
-
-  const theme = isDarkTheme ? CustomDarkTheme : CustomDefaultTheme;
 
   const loginReducer = (prevState, action) => {
     switch (action.type) {
