@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react';
+import React, { useContext } from 'react';
 import { View, StyleSheet } from 'react-native';
 import {
   Avatar,
@@ -6,7 +6,6 @@ import {
   Caption,
   Drawer,
   Text,
-  TouchableRipple,
   Switch,
   useTheme,
 } from 'react-native-paper';
@@ -76,20 +75,14 @@ export function DrawerContent(props) {
               }}
             />
           </Drawer.Section>
-
           <Drawer.Section title='Preferences'>
-            <TouchableRipple
-              onPress={() => {
-                toggleTheme();
-              }}
-            >
-              <View style={styles.preference}>
-                <Text>Dark Theme</Text>
-                <View pointerEvents='none'>
-                  <Switch value={paperTheme.dark} />
-                </View>
-              </View>
-            </TouchableRipple>
+            <View style={styles.preference}>
+              <Text>Dark Theme</Text>
+              <Switch
+                value={paperTheme.dark}
+                onValueChange={() => toggleTheme()}
+              />
+            </View>
           </Drawer.Section>
         </View>
       </DrawerContentScrollView>
