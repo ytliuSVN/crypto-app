@@ -26,7 +26,6 @@ const SplashScreen = ({ navigation }) => {
       <View style={styles.header}>
         <Animatable.Image
           animation='bounceIn'
-          duraton='1500'
           source={require('../assets/minecoin.png')}
           style={styles.logo}
           resizeMode='stretch'
