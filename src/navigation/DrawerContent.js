@@ -11,7 +11,7 @@ import {
 } from 'react-native-paper';
 import { DrawerContentScrollView, DrawerItem } from '@react-navigation/drawer';
 import { AntDesign } from '@expo/vector-icons';
-import { AuthContext } from '../components/context';
+import { AuthContext } from '~components/context';
 
 export function DrawerContent(props) {
   const paperTheme = useTheme();

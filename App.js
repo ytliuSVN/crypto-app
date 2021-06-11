@@ -1,12 +1,12 @@
 import React, { useState, useEffect, useMemo, useReducer } from 'react';
 import { View, ActivityIndicator } from 'react-native';
-import { AuthContext } from './src/components/context';
+import { AuthContext } from '~components/context';
 import { createDrawerNavigator } from '@react-navigation/drawer';
-import { DrawerContent } from './src/navigation/DrawerContent';
-import RootStackScreen from './src/navigation/RootStackScreen';
-import BottomTabNavigator from './src/navigation/TabNavigator';
+import { DrawerContent } from '~navigation/DrawerContent';
+import RootStackScreen from '~navigation/RootStackScreen';
+import BottomTabNavigator from '~navigation/TabNavigator';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import { CustomDarkTheme, CustomDefaultTheme } from './src/themes/themeProvider';
+import { CustomDarkTheme, CustomDefaultTheme } from '~themes/themeProvider';
 import { NavigationContainer } from '@react-navigation/native';
 import { Provider as PaperProvider } from 'react-native-paper';
 

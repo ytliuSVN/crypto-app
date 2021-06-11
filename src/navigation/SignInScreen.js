@@ -14,7 +14,7 @@ import * as Animatable from 'react-native-animatable';
 import { LinearGradient } from 'expo-linear-gradient';
 import { AntDesign } from '@expo/vector-icons';
 import Feather from 'react-native-vector-icons/Feather';
-import { AuthContext } from '../components/context';
+import { AuthContext } from '~components/context';
 import Users from '../model/users';
 import { useTheme } from '@react-navigation/native';
 
