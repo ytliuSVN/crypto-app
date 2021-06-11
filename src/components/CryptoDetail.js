@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
-import { View, Text, StyleSheet } from 'react-native';
+import { View, Text, StyleSheet, TouchableHighlight } from 'react-native';
 import { ButtonGroup } from 'react-native-elements';
 import Area from './Area';
 import { useTheme } from '@react-navigation/native';
@@ -26,7 +26,7 @@ const CryptoDetail = ({ route }) => {
 
   return (
     <View style={[styles.container, { backgroundColor: colors.surface }]}>
-      <Text style={styles.text}>
+      <Text style={[styles.text, { color: colors.secondary }]}>
         {`Price Chart for ${period(selected)}`} (&euro;)
       </Text>
       <Area coinId={itemId} selectedIndex={selected} />
@@ -34,9 +34,16 @@ const CryptoDetail = ({ route }) => {
         buttons={buttons}
         onPress={setSelected}
         selectedIndex={selected}
-        selectedButtonStyle={{ backgroundColor: '#04c2af' }}
-        containerStyle={{ height: 50 }}
-        innerBorderStyle={{ width: 1, color: '#e0e0e0' }}
+        Component={TouchableHighlight}
+        underlayColor='#919191'
+        buttonStyle={{ backgroundColor: colors.background }}
+        textStyle={{ color: colors.secondary }}
+        selectedButtonStyle={{ backgroundColor: '#03AE9D' }}
+        containerStyle={[
+          styles.buttonContainer,
+          { borderColor: colors.success, borderWidth: 1 },
+        ]}
+        innerBorderStyle={{ width: 1, color: colors.accent }}
       />
     </View>
   );
@@ -49,6 +56,10 @@ CryptoDetail.propTypes = {
 export default CryptoDetail;
 
 const styles = StyleSheet.create({
+  buttonContainer: {
+    height: 50,
+    borderRadius: 8,
+  },
   container: {
     flex: 1,
     alignItems: 'center',

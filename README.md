@@ -39,9 +39,9 @@ A Crypto Tracker App inspired by SpiralDev's [**CryptoTracker**](https://github.
 
 ### Dark Theme
 
-| Splash Screen  | Sign In | Sign Up |
+| Splash Screen  | Sign In | Detail Screen |
 | :-: | :-: | :-: |
-| ![Splash Screen](./src/assets/screenshot/d_splash.png) | ![Sign In](./src/assets/screenshot/d_login.png)  |  ![Sign Up](./src/assets/screenshot/d_signup.png) |
+| ![Splash Screen](./src/assets/screenshot/d_splash.png) | ![Sign In](./src/assets/screenshot/d_login.png)  |  ![Detail Screen](./src/assets/screenshot/d_detail.png) |
 
 ### Loading Environment Variables
 
