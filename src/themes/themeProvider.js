@@ -14,13 +14,13 @@ export const CustomDefaultTheme = {
   colors: {
     ...NavigationDefaultTheme.colors,
     ...PaperDefaultTheme.colors,
-    background: '#ffffff',
+    background: '#efefef',
+    surface: '#ffffff',
     text: '#333333',
-    secondary: '#454545',
+    primary: '#009387',
+    secondary: '#03AE9D',
+    tertiary: '#454545',
     danger: '#fb2c33',
-    accent: '#03AE9D',
-    surface: '#efefef',
-    success: '#009387',
   },
 };
 
@@ -30,12 +30,12 @@ export const CustomDarkTheme = {
   colors: {
     ...NavigationDarkTheme.colors,
     ...PaperDarkTheme.colors,
-    background: '#333333',
+    background: '#252525',
+    surface: '#333333',
     text: '#f5f6f7',
-    secondary: '#e3e3e3',
+    primary: '#52e3d4',
+    secondary: '#5bf5e5',
+    tertiary: '#e3e3e3',
     danger: '#ff6363',
-    accent: '#5bf5e5',
-    surface: '#252525',
-    success: '#52e3d4',
   },
 };

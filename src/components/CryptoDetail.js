@@ -25,8 +25,8 @@ const CryptoDetail = ({ route }) => {
   };
 
   return (
-    <View style={[styles.container, { backgroundColor: colors.surface }]}>
-      <Text style={[styles.text, { color: colors.secondary }]}>
+    <View style={[styles.container, { backgroundColor: colors.background }]}>
+      <Text style={[styles.text, { color: colors.tertiary }]}>
         {`Price Chart for ${period(selected)}`} (&euro;)
       </Text>
       <Area coinId={itemId} selectedIndex={selected} />
@@ -36,14 +36,14 @@ const CryptoDetail = ({ route }) => {
         selectedIndex={selected}
         Component={TouchableHighlight}
         underlayColor='#919191'
-        buttonStyle={{ backgroundColor: colors.background }}
-        textStyle={{ color: colors.secondary }}
+        buttonStyle={{ backgroundColor: colors.surface }}
+        textStyle={{ color: colors.tertiary }}
         selectedButtonStyle={{ backgroundColor: '#03AE9D' }}
         containerStyle={[
           styles.buttonContainer,
-          { borderColor: colors.success, borderWidth: 1 },
+          { borderColor: colors.primary, borderWidth: 1 },
         ]}
-        innerBorderStyle={{ width: 1, color: colors.accent }}
+        innerBorderStyle={{ width: 1, color: colors.secondary }}
       />
     </View>
   );

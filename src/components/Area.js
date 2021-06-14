@@ -13,10 +13,12 @@ import { AreaChart, Grid, YAxis, XAxis } from 'react-native-svg-charts';
 import * as shape from 'd3-shape';
 import { COINGECKO_URL } from '@env';
 import useRequest from './Hooks/UseFetch';
+import { useTheme } from '@react-navigation/native';
 
 const { height, width } = Dimensions.get('window');
 
 const Area = ({ coinId, selectedIndex }) => {
+  const { colors } = useTheme();
   const handleUrlParams = (selectedIndex) => {
     switch (selectedIndex) {
       case 0:
@@ -36,8 +38,8 @@ const Area = ({ coinId, selectedIndex }) => {
   const { data, loading, error } = useRequest(baseUrl);
 
   const contentInset = { top: 30, bottom: 30 };
-  const labelsY = { fill: 'grey', fontSize: 10 };
-  const labelsX = { fill: 'gray', fontSize: 10, rotation: 20, originY: 30, y: 5 };
+  const labelsY = { fill: colors.tertiary, fontSize: 10 };
+  const labelsX = { fill: colors.tertiary, fontSize: 10, rotation: 20, originY: 30, y: 5 };
 
   const Line = ({ line }) => (
     <Path

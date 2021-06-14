@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { View, Text, Button, StyleSheet, SafeAreaView } from 'react-native';
-import XAxisScaleTimeExample from './ScaleTime';
+// import XAxisScaleTimeExample from './ScaleTime';
 
 const Setting = () => {
   return (
     <View style={styles.container}>
-      <XAxisScaleTimeExample />
+      {/* <XAxisScaleTimeExample /> */}
     </View>
   );
 };

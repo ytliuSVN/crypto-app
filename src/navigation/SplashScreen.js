@@ -35,7 +35,7 @@ const SplashScreen = ({ navigation }) => {
         style={[
           styles.footer,
           {
-            backgroundColor: colors.background,
+            backgroundColor: colors.surface,
           },
         ]}
         animation='fadeInUpBig'

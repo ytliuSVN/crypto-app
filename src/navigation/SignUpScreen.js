@@ -83,7 +83,7 @@ const SignUpScreen = ({ navigation }) => {
         style={[
           styles.footer,
           {
-            backgroundColor: colors.background,
+            backgroundColor: colors.surface,
           },
         ]}
       >
@@ -114,7 +114,7 @@ const SignUpScreen = ({ navigation }) => {
 
           {data.check_textInputChange ? (
             <Animatable.View animation='bounceIn'>
-              <Feather name='check-circle' color={colors.accent} size={20} />
+              <Feather name='check-circle' color={colors.secondary} size={20} />
             </Animatable.View>
           ) : null}
         </View>
@@ -149,7 +149,7 @@ const SignUpScreen = ({ navigation }) => {
             {data.secureTextEntry ? (
               <Feather name='eye-off' color='grey' size={20} />
             ) : (
-              <Feather name='eye' color={colors.accent} size={20} />
+              <Feather name='eye' color={colors.secondary} size={20} />
             )}
           </TouchableOpacity>
         </View>
@@ -184,7 +184,7 @@ const SignUpScreen = ({ navigation }) => {
             {data.secureTextEntry ? (
               <Feather name='eye-off' color='grey' size={20} />
             ) : (
-              <Feather name='eye' color={colors.accent} size={20} />
+              <Feather name='eye' color={colors.secondary} size={20} />
             )}
           </TouchableOpacity>
         </View>
@@ -213,7 +213,7 @@ const SignUpScreen = ({ navigation }) => {
             style={[
               styles.signIn,
               {
-                borderColor: colors.success,
+                borderColor: colors.primary,
                 borderWidth: 1,
                 marginTop: 15,
               },
@@ -223,7 +223,7 @@ const SignUpScreen = ({ navigation }) => {
               style={[
                 styles.textSign,
                 {
-                  color: colors.success,
+                  color: colors.primary,
                 },
               ]}
             >
